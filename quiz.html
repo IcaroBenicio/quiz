@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Revisão - Geografia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .quiz-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        .question-box {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .option-button:hover {
+            background-color: #f3f4f6;
+        }
+        .correct {
+            background-color: #d1fae5;
+            border-color: #10b981;
+        }
+        .incorrect {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #4f46e5;
+            transition: width 0.3s;
+        }
+        .result-box {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: #e0e7ff;
+            color: #4338ca;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8 flex items-center justify-center min-h-screen">
+    <div class="container">
+        <div class="quiz-card">
+            <h1 class="text-3xl font-bold text-center text-gray-900 mb-6">Quiz de Revisão</h1>
+            <p id="progressText" class="text-sm text-center text-gray-500 mb-4"></p>
+            <div class="progress-bar mb-6">
+                <div id="progressBar" class="progress" style="width: 0%;"></div>
+            </div>
+            
+            <div id="quizContainer">
+                <!-- Questões são carregadas pelo JavaScript -->
+            </div>
+            
+            <div id="resultContainer" class="hidden">
+                <div class="result-box">
+                    <h2 class="text-2xl font-bold mb-2">Quiz Concluído!</h2>
+                    <p class="text-lg">Você acertou <span id="scoreText" class="font-bold">0</span> de 40 questões.</p>
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <button id="restartBtn" class="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-indigo-700 transition duration-300">
+                        Recomeçar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizContainer = document.getElementById('quizContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const resultContainer = document.getElementById('resultContainer');
+        const scoreText = document.getElementById('scoreText');
+        const restartBtn = document.getElementById('restartBtn');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
+
+        const questions = [
+            {
+                text: 'A presença da Cordilheira dos Andes na região metropolitana de La Paz (Bolívia) influenciou a criação de um moderno sistema de:',
+                options: ['Metrô subterrâneo', 'Teleféricos aéreos', 'Bondes elétricos', 'Monotrilho de superfície'],
+                correct: 1
+            },
+            {
+                text: 'A principal causa da violência nos países da América Latina, segundo o texto da página 94, está ligada à:',
+                options: ['Corrupção política generalizada', 'Desigualdade social e falta de oportunidades', 'Deficiência no sistema educacional', 'Excessiva industrialização'],
+                correct: 1
+            },
+            {
+                text: 'A urbanização desordenada na América do Sul tem como consequência o crescimento de moradias precárias em áreas de risco, como:',
+                options: ['Centros comerciais', 'Áreas rurais planas', 'Encostas de morros e margens de rios', 'Condomínios de alto padrão'],
+                correct: 2
+            },
+            {
+                text: 'O termo "favela", que hoje designa assentamentos precários no Brasil, teve origem com a ocupação do Morro da Providência por:',
+                options: ['Imigrantes europeus', 'Mineradores de ouro', 'Ex-combatentes da Guerra de Canudos', 'Trabalhadores rurais do Sul'],
+                correct: 2
+            },
+            {
+                text: 'Em 2022, na América Latina e Caribe, o percentual da população que vivia em condições de extrema pobreza era de, aproximadamente:',
+                options: ['5%', '50%', '13%', '32%'],
+                correct: 2
+            },
+            {
+                text: 'O que o texto da página 96 identifica como um dos principais problemas da infraestrutura de transportes na maioria dos países da América do Sul?',
+                options: ['Excesso de trens de alta velocidade', 'Prioridade à circulação de pedestres', 'O serviço público é gerenciado por empresas privadas e é caro e de má qualidade', 'Investimento maciço em hidrovias'],
+                correct: 2
+            },
+            {
+                text: 'A crise hídrica, a poluição e a impermeabilização excessiva do solo nas cidades latino-americanas são exemplos de problemas urbanos de ordem:',
+                options: ['Social', 'Política', 'Econômica', 'Ambiental'],
+                correct: 3
+            },
+            {
+                text: 'O Movimento dos Trabalhadores Sem Teto (MTST) e o Movimento Passe Livre (MPL) são exemplos de:',
+                options: ['Partidos políticos', 'Empresas de tecnologia', 'Movimentos sociais urbanos', 'Organismos internacionais'],
+                correct: 2
+            },
+            {
+                text: 'O alto índice de informalidade no trabalho na América do Sul significa que a maior parte dos empregos criados está em condições:',
+                options: ['De pleno emprego e estabilidade', 'Sem garantias ou segurança para o trabalhador', 'De atuação em empresas multinacionais', 'Com salários acima da média'],
+                correct: 1
+            },
+            {
+                text: 'A segregação socioespacial é visível em cidades como Recife (PE), onde se observa a coexistência de:',
+                options: ['Prédios comerciais e industriais', 'Praias e resorts de luxo', 'Moradias precárias e edifícios de classe média/alta', 'Parques e áreas verdes'],
+                correct: 2
+            },
+            {
+                text: 'Quais são as duas línguas majoritárias da população na América do Sul, herança do período colonial?',
+                options: ['Inglês e Francês', 'Alemão e Italiano', 'Espanhol e Português', 'Holandês e Sueco'],
+                correct: 2
+            },
+            {
+                text: 'O conceito de "Exploração", ligado à colonização, está diretamente relacionado a qual atividade econômica da época?',
+                options: ['Criação de universidades', 'Fomento à indústria local', 'Extração de recursos naturais (mineração e outros)', 'Desenvolvimento de alta tecnologia'],
+                correct: 2
+            },
+            {
+                text: 'O aspecto socioeconômico de "Salário - exportação" é uma característica da:',
+                options: ['Independência política', 'Crescimento da indústria de base', 'Dependência econômica', 'Proteção ambiental'],
+                correct: 2
+            },
+            {
+                text: 'A Mestiçagem na população sul-americana é o resultado da miscigenação entre, principalmente, quais grupos?',
+                options: ['Europeus e Asiáticos', 'Europeus, Indígenas e Africanos', 'Europeus e Americanos do Norte', 'Somente Indígenas e Africanos'],
+                correct: 1
+            },
+            {
+                text: 'O estudo de "Recursos Naturais" na América do Sul inclui, principalmente, a presença de:',
+                options: ['Clima frio', 'Mineração, cobre, ouro, ferro e vegetação', 'Grandes desertos', 'Baixa biodiversidade'],
+                correct: 1
+            },
+            {
+                text: 'Quais atividades agrárias estão listadas como importantes na teia de conhecimento?',
+                options: ['Caça e pesca em alto-mar', 'Extrativismo vegetal e silvicultura', 'Agricultura e Pecuária', 'Biotecnologia e nanotecnologia'],
+                correct: 2
+            },
+            {
+                text: 'A questão da desigualdade e da pobreza é um aspecto socioeconômico que afeta o continente desde:',
+                options: ['O início da Guerra Fria', 'O século XXI', 'O período colonial (países historicamente desiguais)', 'A Segunda Guerra Mundial'],
+                correct: 2
+            },
+            {
+                text: 'Qual é o principal objetivo dos projetos de transporte, como a rede de teleféricos de La Paz, em regiões com obstáculos geográficos severos?',
+                options: ['Atrair turistas', 'Facilitar a mineração', 'Melhorar a mobilidade e integração urbana', 'Reduzir o custo da energia'],
+                correct: 2
+            },
+            {
+                text: 'A palavra "crioulo(a)", relacionada à população, historicamente se referia aos filhos de:',
+                options: ['Africanos no Brasil', 'Indígenas na América Central', 'Espanhóis nascidos na América', 'Franceses no Caribe'],
+                correct: 2
+            },
+            {
+                text: 'O conceito de "Refinação de recursos" na Colônia era geralmente feito:',
+                options: ['Na própria América, incentivando a indústria', 'Por meio de cooperativas indígenas', 'Nas metrópoles europeias (Portugal e Espanha)', 'Em fábricas dos Estados Unidos'],
+                correct: 2
+            },
+            {
+                text: 'O Mercosul é um tipo de bloco econômico conhecido como:',
+                options: ['Zona de Livre Comércio', 'União Política', 'União Aduaneira', 'Mercado Comum'],
+                correct: 2
+            },
+            {
+                text: 'O bloco que foi criado em 1948 com o objetivo de promover a paz, a democracia e os direitos humanos entre os 35 países americanos é a(o):',
+                options: ['OEA (Organização dos Estados Americanos)', 'ONU', 'Aladi', 'Opep'],
+                correct: 0
+            },
+            {
+                text: 'Qual bloco de livre comércio foi substituído pelo USMCA em 2020?',
+                options: ['Alca', 'CAN', 'Nafta', 'Alba-TCP'],
+                correct: 2
+            },
+            {
+                text: 'O bloco que visa promover a integração política, econômica e de infraestrutura dos países sul-americanos e que entrou em suspensão em 2017 é a(o):',
+                options: ['Unasul (União de Nações Sul-Americanas)', 'Mercosul', 'Aladi', 'CAN'],
+                correct: 0
+            },
+            {
+                text: 'A Opep (Organização dos Países Exportadores de Petróleo) é uma organização que busca:',
+                options: ['Unificar a moeda europeia', 'Promover a integração cultural', 'Coordenar e unificar as políticas petrolíferas', 'Gerenciar a produção de cobre'],
+                correct: 2
+            },
+            {
+                text: 'A sigla CAN (Comunidade Andina de Nações) foi criada para promover a integração econômica, política e social entre quais países, principalmente?',
+                options: ['Brasil, Argentina, Uruguai', 'EUA, México, Canadá', 'Bolívia, Colômbia, Equador, Peru', 'Nigéria, Irã, Arábia Saudita'],
+                correct: 2
+            },
+            {
+                text: 'A ALBA-TCP (Aliança Bolivariana para os Povos de Nossa América) tem como principal foco:',
+                options: ['A livre circulação de capitais', 'A criação de um banco privado', 'A ênfase no social, na saúde e na diminuição da desigualdade', 'A construção de grandes rodovias'],
+                correct: 2
+            },
+            {
+                text: 'A Aladi (Associação Latino-Americana de Integração) tem o objetivo primordial de:',
+                options: ['Criar um banco de desenvolvimento', 'Focar na área militar', 'Estabelecer, progressivamente, um mercado comum latino-americano', 'Unificar o sistema de transportes'],
+                correct: 2
+            },
+            {
+                text: 'O principal objetivo da OEI (Organização dos Estados Ibero-Americanos) é o avanço nos campos da:',
+                options: ['Economia e Comércio', 'Educação, Ciência, Tecnologia e Cultura', 'Esportes e Lazer', 'Agricultura e Pecuária'],
+                correct: 1
+            },
+            {
+                text: 'Em 2020, o Chile era um membro associado, mas não pleno, de qual importante bloco sul-americano?',
+                options: ['OTCA', 'Opep', 'Mercosul', 'Caricom'],
+                correct: 2
+            },
+            {
+                text: 'O principal objetivo da OTCA (Organização do Tratado de Cooperação Amazônica) é proteger:',
+                options: ['O petróleo do Oriente Médio', 'O meio ambiente e o desenvolvimento sustentável da Amazônia', 'Os interesses comerciais dos EUA', 'A produção de carros elétricos'],
+                correct: 1
+            },
+            {
+                text: 'Qual organismo de integração regional reúne 12 nações do Caribe e busca a integração econômica, social e política?',
+                options: ['CAN', 'Unasul', 'Aladi', 'Caricom (Comunidade do Caribe)'],
+                correct: 3
+            },
+            {
+                text: 'A Aladi (Associação Latino-Americana de Integração) tem o objetivo primordial de:',
+                options: ['Criar um banco de desenvolvimento', 'Focar na área militar', 'Estabelecer, progressivamente, um mercado comum latino-americano', 'Unificar o sistema de transportes'],
+                correct: 2
+            },
+            {
+                text: 'O desemprego estrutural é aquele causado principalmente:',
+                options: ['Por crises econômicas passageiras', 'Pela falta de investimento público', 'Pela modernização das fábricas e substituição do trabalho por máquinas', 'Pelo avanço da agricultura'],
+                correct: 2
+            },
+            {
+                text: 'O Prosul (Fórum para o Progresso e Integração da América do Sul) foi lançado em 2019 com a proposta de ser mais leve e flexível que a:',
+                options: ['OEA', 'Unasul', 'Mercosul', 'CAN'],
+                correct: 1
+            },
+            {
+                text: 'Qual é o órgão financeiro criado com o objetivo de apoiar o desenvolvimento dos países membros, especialmente em projetos de setores como infraestrutura e sustentabilidade?',
+                options: ['FMI', 'OEA', 'Banco de desenvolvimento (NBD - Novo Banco de Desenvolvimento)', 'Banco Mundial'],
+                correct: 2
+            },
+            {
+                text: 'O Sistema de União Monetária mais bem-sucedido do mundo é:',
+                options: ['O Dólar americano', 'A Libra esterlina', 'O Euro', 'O Yuan chinês'],
+                correct: 2
+            },
+            {
+                text: 'A diferença entre a Linha Azul e a Linha Verde na rede de teleféricos de La Paz (Bolívia) é que elas interligam:',
+                options: ['Diferentes bairros nobres', 'Apenas zonas rurais', 'Diferentes pontos da região metropolitana (interligando diferentes altitudes)', 'Aeroportos internacionais'],
+                correct: 2
+            },
+            {
+                text: 'A guerra ao crime organizado é citada na página 94 como uma das ações que podem ajudar a:',
+                options: ['Aumentar a informalidade', 'Reduzir o comércio exterior', 'Melhorar a qualidade de vida e diminuir a violência nas cidades latino-americanas', 'Diminuir o índice de escolaridade'],
+                correct: 2
+            },
+            {
+                text: 'A ALCA (Área de Livre Comércio das Américas) não foi concretizada. Qual era o seu principal objetivo?',
+                options: ['A união aduaneira da América do Sul', 'A criação de um parlamento regional', 'A eliminação gradual das barreiras alfandegárias entre todos os países das Américas', 'A coordenação das políticas petrolíferas'],
+                correct: 2
+            }
+        ];
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            const currentQuestion = questions[currentQuestionIndex];
+            quizContainer.innerHTML = `
+                <div class="question-box">
+                    <p class="text-xl font-semibold mb-4">${currentQuestion.text}</p>
+                    <div id="optionsContainer">
+                        ${currentQuestion.options.map((option, index) => `
+                            <button class="option-button" data-index="${index}">${option}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            isAnswered = false;
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.addEventListener('click', handleAnswer);
+            });
+
+            updateProgressBar();
+        }
+
+        function handleAnswer(event) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const selectedIndex = parseInt(event.target.dataset.index);
+            const currentQuestion = questions[currentQuestionIndex];
+            const correctIndex = currentQuestion.correct;
+
+            const allButtons = document.querySelectorAll('.option-button');
+            allButtons.forEach(button => {
+                button.classList.add('disabled');
+                const btnIndex = parseInt(button.dataset.index);
+                if (btnIndex === correctIndex) {
+                    button.classList.add('correct');
+                } else if (btnIndex === selectedIndex) {
+                    button.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === correctIndex) {
+                score++;
+            }
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 1500);
+        }
+
+        function updateProgressBar() {
+            if (currentQuestionIndex < questions.length) {
+                const progress = (currentQuestionIndex / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Questão ${currentQuestionIndex + 1} de ${questions.length}`;
+            } else {
+                progressBar.style.width = `100%`;
+                progressText.textContent = "Quiz Concluído!";
+            }
+        }
+
+        function showResults() {
+            quizContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            scoreText.textContent = score;
+        }
+
+        restartBtn.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultContainer.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            loadQuestion();
+        });
+
+        // Inicializa o quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
