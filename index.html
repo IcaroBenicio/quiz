@@ -1,122 +1,132 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Revisão - Geografia</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .quiz-card {
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
-        .question-box {
-            background-color: #f9fafb;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .option-button {
-            width: 100%;
-            text-align: left;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .option-button:hover {
-            background-color: #f3f4f6;
-        }
-        .correct {
-            background-color: #d1fae5;
-            border-color: #10b981;
-        }
-        .incorrect {
-            background-color: #fee2e2;
-            border-color: #ef4444;
-        }
-        .disabled {
-            pointer-events: none;
-            opacity: 0.7;
-        }
-        .progress-bar {
-            height: 10px;
-            background-color: #e5e7eb;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        .progress {
-            height: 100%;
-            background-color: #4f46e5;
-            transition: width 0.3s;
-        }
-        .result-box {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            background-color: #e0e7ff;
-            color: #4338ca;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Avançado — Geografia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Pequenos ajustes visuais adicionais */
+    .option-btn { transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease; }
+    .option-btn:active { transform: scale(.98); }
+    .progress-bar-inner { transition: width .45s cubic-bezier(.2,.9,.2,1); }
+    .timer-bar { transition: width 1s linear; background: linear-gradient(90deg,#ffb86b,#ff6b9a); }
+    .fade-in { animation: fadeIn .35s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+  </style>
 </head>
-<body class="bg-gray-100 p-8 flex items-center justify-center min-h-screen">
-    <div class="container">
-        <div class="quiz-card">
-            <h1 class="text-3xl font-bold text-center text-gray-900 mb-6">Quiz de Revisão</h1>
-            <p id="progressText" class="text-sm text-center text-gray-500 mb-4"></p>
-            <div class="progress-bar mb-6">
-                <div id="progressBar" class="progress" style="width: 0%;"></div>
-            </div>
-            
-            <div id="quizContainer">
-                <!-- Questões são carregadas pelo JavaScript -->
-            </div>
-            
-            <div id="resultContainer" class="hidden">
-                <div class="result-box">
-                    <h2 class="text-2xl font-bold mb-2">Quiz Concluído!</h2>
-                    <p class="text-lg">Você acertou <span id="scoreText" class="font-bold">0</span> de 40 questões.</p>
-                </div>
-                <div class="mt-4 flex justify-center">
-                    <button id="restartBtn" class="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-indigo-700 transition duration-300">
-                        Recomeçar
-                    </button>
-                </div>
-            </div>
+<body class="min-h-screen bg-gradient-to-br from-sky-50 to-amber-50 font-sans">
+
+  <!-- Container central -->
+  <div class="max-w-2xl mx-auto p-6">
+
+    <!-- START SCREEN -->
+    <section id="startScreen" class="bg-white rounded-xl shadow-lg p-8 text-center">
+      <h1 class="text-3xl font-bold text-sky-700 mb-2">Quiz Avançado de Geografia</h1>
+      <p class="text-gray-600 mb-6">Teste seus conhecimentos — perguntas aleatórias, tempo por pergunta e ranking local.</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <label class="flex items-center gap-2 text-sm text-gray-700">
+          <span>Tempo por pergunta</span>
+          <select id="timePerQuestion" class="ml-2 rounded border px-2 py-1">
+            <option value="15">15 s</option>
+            <option value="20" selected>20 s</option>
+            <option value="30">30 s</option>
+          </select>
+        </label>
+
+        <button id="startBtn" class="mt-4 sm:mt-0 px-6 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition">
+          Iniciar Quiz
+        </button>
+
+        <button id="resumeBtn" class="mt-4 sm:mt-0 px-4 py-2 bg-amber-400 text-white rounded-lg hover:bg-amber-500 transition hidden">
+          Retomar
+        </button>
+
+        <button id="viewRankingBtn" class="mt-4 sm:mt-0 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition">
+          Ver Ranking
+        </button>
+      </div>
+      <p class="text-xs text-gray-400 mt-4">O progresso é salvo localmente no seu navegador.</p>
+    </section>
+
+    <!-- QUIZ CARD -->
+    <section id="quizCard" class="hidden mt-6 bg-white rounded-xl shadow-lg p-6 fade-in">
+      <!-- topo: título + progress -->
+      <div class="mb-4">
+        <div class="flex items-center justify-between mb-2">
+          <h2 id="cardTitle" class="text-xl font-semibold text-sky-700">Pergunta</h2>
+          <div class="text-sm text-gray-600" id="progressText" aria-live="polite">Questão 1 de 5 (0%)</div>
         </div>
-    </div>
 
-    <script>
-        const quizContainer = document.getElementById('quizContainer');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-        const resultContainer = document.getElementById('resultContainer');
-        const scoreText = document.getElementById('scoreText');
-        const restartBtn = document.getElementById('restartBtn');
+        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+          <div id="progressBar" class="h-3 progress-bar-inner bg-gradient-to-r from-sky-500 to-rose-400 rounded-full" style="width:0%"></div>
+        </div>
+      </div>
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let isAnswered = false;
+      <!-- Temporizador visual -->
+      <div class="relative h-2 bg-gray-100 rounded-full overflow-hidden my-3">
+        <div id="timerBar" class="timer-bar absolute left-0 top-0 h-full" style="width:100%"></div>
+      </div>
+      <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+        <div id="timerText">Tempo: 20s</div>
+        <div id="scoreMini">Acertos: 0</div>
+      </div>
 
-        const questions = [
-            {
+      <!-- Pergunta & opções -->
+      <div id="questionBox" class="mb-4">
+        <p id="questionText" class="text-lg text-gray-800 font-medium">Pergunta aparece aqui</p>
+      </div>
+
+      <div id="options" class="grid gap-3"></div>
+
+      <!-- ação -->
+      <div class="flex items-center justify-between mt-6">
+        <button id="skipBtn" class="px-4 py-2 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50">Pular</button>
+        <div class="flex items-center gap-3">
+          <button id="nextBtn" class="px-5 py-2 bg-sky-600 text-white rounded-md hidden">Próxima</button>
+          <button id="quitBtn" class="px-4 py-2 rounded-md border border-red-100 text-red-600 hover:bg-red-50">Sair</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="resultCard" class="hidden mt-6 bg-white rounded-xl shadow-lg p-6 text-center">
+      <h3 id="resultTitle" class="text-2xl font-bold text-sky-700">Resultado</h3>
+      <p id="resultMsg" class="mt-2 text-gray-700"></p>
+      <p class="mt-2 text-lg">Pontuação: <strong id="finalScore">0</strong> / <span id="totalQ">0</span></p>
+
+      <div id="wrongList" class="mt-4 text-left"></div>
+
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 items-center justify-center">
+        <button id="shareBtn" class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">Compartilhar</button>
+        <button id="tryAgainBtn" class="px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600">Jogar de novo</button>
+        <button id="backHomeBtn" class="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-100">Voltar</button>
+      </div>
+    </section>
+
+    <!-- RANKING modal simples -->
+    <section id="rankingCard" class="hidden mt-6 bg-white rounded-xl shadow-lg p-6">
+      <h3 class="text-xl font-semibold text-sky-700">Ranking (últimas pontuações)</h3>
+      <ul id="rankingList" class="mt-4 text-gray-700"></ul>
+      <div class="mt-4 flex gap-3">
+        <button id="clearRankingBtn" class="px-3 py-2 bg-red-400 text-white rounded-md hover:bg-red-500">Limpar histórico</button>
+        <button id="closeRankingBtn" class="px-3 py-2 bg-gray-200 rounded-md hover:bg-gray-100">Fechar</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+  /**********************
+   * Configurações / dados
+   **********************/
+  const STORAGE_KEY = 'quiz_state_v1';
+  const HISTORY_KEY = 'quiz_history_v1';
+
+  // perguntas originais (pode ampliar)
+  const ALL_QUESTIONS = [
+     {
                 text: 'A presença da Cordilheira dos Andes na região metropolitana de La Paz (Bolívia) influenciou a criação de um moderno sistema de:',
                 options: ['Metrô subterrâneo', 'Teleféricos aéreos', 'Bondes elétricos', 'Monotrilho de superfície'],
                 correct: 1
@@ -315,91 +325,537 @@
                 text: 'A ALCA (Área de Livre Comércio das Américas) não foi concretizada. Qual era o seu principal objetivo?',
                 options: ['A união aduaneira da América do Sul', 'A criação de um parlamento regional', 'A eliminação gradual das barreiras alfandegárias entre todos os países das Américas', 'A coordenação das políticas petrolíferas'],
                 correct: 2
-            }
-        ];
+            },
 
-        function loadQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                showResults();
-                return;
-            }
+             { text: 'O termo "gentrificação" descreve o processo de revitalização de áreas urbanas que resulta na valorização do local e, consequentemente, na:', options: ['Diminuição do custo de vida', 'Aumento da população de baixa renda', 'Expulsão de moradores de baixa renda', 'Aumento de espaços verdes'], correct: 2 },
+            { text: 'A "cidade informal" ou "precária" se desenvolve principalmente pela incapacidade do setor formal de absorver a força de trabalho, resultando em moradias sem:', options: ['Conexão com a internet', 'Acesso a mercados próximos', 'Regularização fundiária e infraestrutura básica', 'Áreas de lazer e entretenimento'], correct: 2 },
+            { text: 'Qual é a principal diferença entre o desemprego conjuntural e o desemprego estrutural?', options: ['Um é causado por crises econômicas, o outro por modernização tecnológica', 'Um afeta o setor de serviços, o outro o industrial', 'Um é sazonal, o outro é permanente', 'Um afeta trabalhadores qualificados, o outro não qualificados'], correct: 0 },
+            { text: 'O crescimento urbano desordenado, a partir do século XX na América do Sul, está diretamente ligado a qual fenômeno social e econômico?', options: ['Queda nas taxas de natalidade', 'Êxodo rural em larga escala', 'Aumento do turismo internacional', 'Obrigatoriedade de morar nas cidades'], correct: 1 },
+            { text: 'A "segregação socioespacial" é uma das marcas da urbanização latino-americana, onde as classes sociais se separam no espaço urbano. Qual é a principal consequência disso para a população mais pobre?', options: ['Melhor acesso a serviços públicos', 'Maior integração social', 'Pior acesso a empregos, saúde e educação', 'Redução da informalidade'], correct: 2 },
+            { text: 'A "dependência econômica" dos países da América do Sul em relação a nações mais desenvolvidas é uma herança colonial que se perpetuou pelo modelo de:', options: ['Indústria pesada', 'Comércio triangular', 'Economia primário-exportadora', 'Economia de serviços'], correct: 2 },
+            { text: 'Qual foi o principal objetivo das reformas urbanas no final do século XIX, como a do Rio de Janeiro, que, na prática, levou à expulsão da população pobre do centro?', options: ['Combater a criminalidade', 'Embelezar a cidade e modernizá-la', 'Reduzir a população total', 'Fomentar a habitação popular'], correct: 1 },
+            { text: 'O conceito de "Mestiçagem" na América do Sul não se limita apenas à mistura biológica, mas também a qual processo cultural?', options: ['Homogeneização cultural', 'Sincretismo religioso e cultural', 'Isolamento de tradições', 'Supressão de idiomas'], correct: 1 },
+            { text: 'A teia de conhecimento menciona que a "colonização de exploração" resultou em países com "sociedades desiguais". Qual o principal fator que contribuiu para essa desigualdade?', options: ['Adoção de diferentes idiomas', 'A concentração de terras e riquezas nas mãos de poucos', 'A falta de recursos naturais', 'A escassez de mão de obra'], correct: 1 },
+            { text: 'O "comércio" no período colonial era um monopólio. Quem detinha esse monopólio e como isso afetava a economia da colônia?', options: ['As colônias, que controlavam as exportações', 'Os indígenas, que controlavam as rotas comerciais', 'As metrópoles, que controlavam o que era comprado e vendido', 'Os Estados Unidos, que controlavam o comércio internacional'], correct: 2 },
+            { text: 'A criação do Mercosul como "união aduaneira" significa que os países membros adotaram uma TEC (Tarifa Externa Comum). O que a TEC faz?', options: ['Isenta todos os produtos de impostos', 'Aplica a mesma tarifa para produtos importados de fora do bloco', 'Cria impostos internos entre os membros', 'Permite que cada país negocie tarifas separadamente'], correct: 1 },
+            { text: 'A UNASUL, que se propunha a ser uma organização intergovernamental para a integração sul-americana, entrou em suspensão. Qual foi a principal razão para isso?', options: ['Crise econômica', 'Divergências ideológicas e políticas entre os líderes', 'Guerra civil entre membros', 'Adesão de novos membros'], correct: 1 },
+            { text: 'O acordo comercial entre os EUA, México e Canadá (USMCA) substituiu o NAFTA. Qual a principal alteração desse novo acordo?', options: ['Aumento de tarifas para todos os membros', 'Redução da proteção de direitos autorais', 'Novas regras para a indústria automobilística', 'Inclusão de países da América do Sul'], correct: 2 },
+            { text: 'Qual organismo de integração é considerado o mais antigo do hemisfério ocidental e tem sede em Washington, D.C.?', options: ['OEA', 'ALADI', 'CAN', 'CARICOM'], correct: 0 },
+            { text: 'A "desigualdade" é uma herança colonial. Qual grupo social, na hierarquia colonial, tinha o maior poder e privilégios?', options: ['Indígenas e escravos', 'Mestiços e crioulos', 'Crioulos', 'Chapetones'], correct: 3 },
+            { text: 'O Movimento dos Trabalhadores Rurais Sem Terra (MST) e o Movimento dos Trabalhadores Sem Teto (MTST) se diferenciam principalmente pelo foco de sua luta. Qual a diferença?', options: ['O MST luta por reforma agrária no campo; o MTST por moradia digna nas cidades', 'O MST luta por acesso a crédito; o MTST por transporte público', 'O MST é um movimento urbano; o MTST é um movimento rural', 'O MST luta contra a informalidade; o MTST luta contra o desemprego'], correct: 0 },
+            { text: 'O texto sobre "infraestrutura de transportes" na América do Sul aponta que, em muitos países, o sistema é de má qualidade e caro. A culpa é atribuída a qual modelo de gestão?', options: ['Gestão pública com pouco investimento', 'Gestão privada com monopólios', 'Gestão mista, pública e privada', 'Gestão cooperativa'], correct: 1 },
+            { text: 'O conceito de "salário-exportação" no modelo de desenvolvimento sul-americano significa que o salário do trabalhador é baixo, o que tem um impacto direto em qual outro fator?', options: ['Aumento do poder de compra', 'Aumento das exportações', 'Aumento da dívida externa', 'Diminuição do mercado interno'], correct: 3 },
+            { text: 'A "Crise Hídrica" é um problema ambiental urbano. Qual é uma das causas principais desse problema nas grandes cidades?', options: ['Aumento da área rural', 'Consumo excessivo e falta de planejamento', 'Uso de energia eólica', 'Chuva excessiva'], correct: 1 },
+            { text: 'A OEI, Organização dos Estados Ibero-americanos, tem foco na educação, ciência, tecnologia e cultura, reunindo países da América Latina, Espanha e qual outro país europeu?', options: ['Portugal', 'França', 'Itália', 'Alemanha'], correct: 0 },
+            { text: 'A ALBA-TCP, Aliança Bolivariana para os Povos de Nossa América, se diferencia por ter uma perspectiva ideológica que prioriza a cooperação e solidariedade em oposição a qual modelo econômico?', options: ['Liberalismo', 'Socialismo', 'Capitalismo', 'Comunismo'], correct: 2 },
+            { text: 'A principal diferença entre uma "Zona de Livre Comércio" e uma "União Aduaneira" é a presença da:', options: ['Livre circulação de pessoas', 'Tarifa Externa Comum', 'Moeda única', 'Política externa comum'], correct: 1 },
+            { text: 'Qual organismo de integração, que tem como membros países da América do Sul e o México, foca no desenvolvimento de um "mercado comum" a longo prazo?', options: ['MERCOSUL', 'ALADI', 'UNASUL', 'OEA'], correct: 1 },
+            { text: 'O termo "subemprego" se refere a trabalhadores que estão empregados, mas que não conseguem ter uma renda suficiente para cobrir os gastos essenciais. É um problema muito presente em áreas urbanas de qual região?', options: ['América do Sul', 'Europa Ocidental', 'América do Norte', 'Japão'], correct: 0 },
+            { text: 'A "crise hídrica" e a "poluição" são problemas ambientais urbanos na América Latina, resultado da falta de:', options: ['Árvores', 'Esgoto e saneamento básico', 'Planejamento e gestão de recursos', 'Carros elétricos'], correct: 2 },
+            { text: 'A "guerra ao crime organizado" é citada como uma das medidas para combater a violência. No entanto, o texto aponta que essa medida é incompleta sem a ação em qual outro setor?', options: ['Turismo', 'Educação e social', 'Agrícola', 'Industrial'], correct: 1 },
+            { text: 'O Chile, citado na página 115, é um membro associado do Mercosul. O que isso significa para o país?', options: ['Ele não participa das reuniões', 'Ele tem acesso a tarifas especiais, mas não assina a TEC', 'Ele é um membro pleno com direito a voto', 'Ele é um observador sem poder decisório'], correct: 1 },
+            { text: 'A Opep, Organização dos Países Exportadores de Petróleo, teve sua fundação motivada por qual objetivo principal?', options: ['Reduzir o preço do petróleo', 'Controlar a produção e garantir a estabilidade dos preços', 'Aumentar a concorrência no mercado', 'Promover a energia renovável'], correct: 1 },
+            { text: 'A teia de conhecimento relaciona o "Colonialismo" com o "Salário - exportação", mostrando que o baixo custo da mão de obra era usado para:', options: ['Melhorar o mercado interno', 'Aumentar a competitividade das exportações', 'Aumentar o poder de compra', 'Aumentar a diversificação econômica'], correct: 1 },
+            { text: 'Qual das seguintes cidades latino-americanas é um exemplo de metrópole com alta segregação socioespacial?', options: ['Montevidéu', 'Assunção', 'Recife', 'Havana'], correct: 2 },
+            { text: 'O termo "mão de obra escrava", na teia de conhecimento, refere-se principalmente à exploração de quais grupos?', options: ['Somente indígenas', 'Somente europeus', 'Indígenas e africanos', 'Somente africanos'], correct: 2 },
+            { text: 'A teia de conhecimento na página 99, ao falar de recursos naturais, menciona "Solo Fértil" e "Água". Qual atividade econômica se beneficia diretamente desses recursos?', options: ['Mineração', 'Pecuária', 'Indústria', 'Silvicultura'], correct: 1 },
+            { text: 'O que o texto da página 92 quer dizer quando se refere a "crescimento caótico" na América do Sul?', options: ['Crescimento econômico acelerado', 'Aumento desordenado da população nas cidades', 'Criação de parques e áreas verdes', 'Aumento de transportes públicos'], correct: 1 },
+            { text: 'O "subemprego", que afeta a maioria dos trabalhadores na América do Sul, tem um impacto direto em qual outro problema social?', options: ['Aumento do poder de compra', 'Aumento das taxas de emprego formal', 'Diminuição da informalidade', 'Pobreza e baixa qualidade de vida'], correct: 3 },
+            { text: 'O Prosul (Fórum para o Progresso e Integração da América do Sul), criado em 2019, foi uma iniciativa para substituir qual bloco, considerado ineficiente e burocrático?', options: ['OEA', 'UNASUL', 'ALADI', 'MERCOSUL'], correct: 1 },
+            { text: 'A "segregação socioespacial" em áreas urbanas pode ser vista na diferença entre o acesso a serviços públicos entre a população de bairros ricos e a de áreas periféricas, como:', options: ['Acesso a transporte privado', 'Acesso a hospitais e escolas de qualidade', 'Acesso a carros de luxo', 'Acesso a internet de banda larga'], correct: 1 },
+            { text: 'A OEA, Organização dos Estados Americanos, possui quais dois objetivos principais, além de promover a democracia e os direitos humanos?', options: ['Cooperação econômica e desenvolvimento social', 'Cooperação militar e política', 'Comércio e segurança', 'Integração cultural e esportiva'], correct: 0 },
+            { text: 'O Chile e o Peru são membros plenos da Comunidade Andina (CAN). Qual a principal característica da CAN?', options: ['É um mercado comum', 'É um bloco de livre comércio', 'É uma união aduaneira', 'É uma aliança política'], correct: 2 },
+    // adicione mais perguntas aqui se quiser
+  ];
 
-            const currentQuestion = questions[currentQuestionIndex];
-            quizContainer.innerHTML = `
-                <div class="question-box">
-                    <p class="text-xl font-semibold mb-4">${currentQuestion.text}</p>
-                    <div id="optionsContainer">
-                        ${currentQuestion.options.map((option, index) => `
-                            <button class="option-button" data-index="${index}">${option}</button>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
+  /**********************
+   * Estado e elementos
+   **********************/
+  let questions = []; // embaralhadas
+  let timePerQuestion = 20;
+  let currentIndex = 0;
+  let score = 0;
+  let wrongs = [];
+  let timerInterval = null;
+  let remaining = 0;
+  let paused = false;
 
-            isAnswered = false;
-            document.querySelectorAll('.option-button').forEach(button => {
-                button.addEventListener('click', handleAnswer);
-            });
+  // elementos DOM
+  const startScreen = document.getElementById('startScreen');
+  const startBtn = document.getElementById('startBtn');
+  const resumeBtn = document.getElementById('resumeBtn');
+  const viewRankingBtn = document.getElementById('viewRankingBtn');
+  const timePerQuestionSel = document.getElementById('timePerQuestion');
 
-            updateProgressBar();
-        }
+  const quizCard = document.getElementById('quizCard');
+  const questionText = document.getElementById('questionText');
+  const optionsEl = document.getElementById('options');
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+  const timerBar = document.getElementById('timerBar');
+  const timerText = document.getElementById('timerText');
+  const scoreMini = document.getElementById('scoreMini');
+  const nextBtn = document.getElementById('nextBtn');
+  const skipBtn = document.getElementById('skipBtn');
+  const quitBtn = document.getElementById('quitBtn');
 
-        function handleAnswer(event) {
-            if (isAnswered) return;
-            isAnswered = true;
+  const resultCard = document.getElementById('resultCard');
+  const resultMsg = document.getElementById('resultMsg');
+  const finalScore = document.getElementById('finalScore');
+  const totalQ = document.getElementById('totalQ');
+  const wrongList = document.getElementById('wrongList');
+  const shareBtn = document.getElementById('shareBtn');
+  const tryAgainBtn = document.getElementById('tryAgainBtn');
+  const backHomeBtn = document.getElementById('backHomeBtn');
 
-            const selectedIndex = parseInt(event.target.dataset.index);
-            const currentQuestion = questions[currentQuestionIndex];
-            const correctIndex = currentQuestion.correct;
+  const rankingCard = document.getElementById('rankingCard');
+  const rankingList = document.getElementById('rankingList');
+  const viewRanking = document.getElementById('viewRankingBtn');
+  const clearRankingBtn = document.getElementById('clearRankingBtn');
+  const closeRankingBtn = document.getElementById('closeRankingBtn');
 
-            const allButtons = document.querySelectorAll('.option-button');
-            allButtons.forEach(button => {
-                button.classList.add('disabled');
-                const btnIndex = parseInt(button.dataset.index);
-                if (btnIndex === correctIndex) {
-                    button.classList.add('correct');
-                } else if (btnIndex === selectedIndex) {
-                    button.classList.add('incorrect');
-                }
-            });
+  // botão retomar
+  const resumeButton = document.getElementById('resumeBtn');
 
-            if (selectedIndex === correctIndex) {
-                score++;
-            }
+  /**********************
+   * Utilitários
+   **********************/
+  function shuffleArray(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
-            setTimeout(() => {
-                currentQuestionIndex++;
-                loadQuestion();
-            }, 1500);
-        }
+  function saveState(){
+    const state = { questions, timePerQuestion, currentIndex, score, wrongs, remaining, paused };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
 
-        function updateProgressBar() {
-            if (currentQuestionIndex < questions.length) {
-                const progress = (currentQuestionIndex / questions.length) * 100;
-                progressBar.style.width = `${progress}%`;
-                progressText.textContent = `Questão ${currentQuestionIndex + 1} de ${questions.length}`;
-            } else {
-                progressBar.style.width = `100%`;
-                progressText.textContent = "Quiz Concluído!";
-            }
-        }
+  function loadState(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return null;
+    try { return JSON.parse(raw); } catch(e){ return null; }
+  }
 
-        function showResults() {
-            quizContainer.classList.add('hidden');
-            resultContainer.classList.remove('hidden');
-            scoreText.textContent = score;
-        }
+  function clearState(){
+    localStorage.removeItem(STORAGE_KEY);
+  }
 
-        restartBtn.addEventListener('click', () => {
-            currentQuestionIndex = 0;
-            score = 0;
-            resultContainer.classList.add('hidden');
-            quizContainer.classList.remove('hidden');
-            loadQuestion();
-        });
+  function addHistoryEntry(sc){
+    const raw = localStorage.getItem(HISTORY_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    arr.unshift({ score: sc, total: questions.length, date: new Date().toISOString() });
+    // guarda só últimos 20
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(arr.slice(0,20)));
+  }
 
-        // Inicializa o quiz
-        loadQuestion();
-    </script>
+  function getHistory(){ const raw = localStorage.getItem(HISTORY_KEY); return raw ? JSON.parse(raw) : []; }
+
+  /**********************
+   * Tela Inicial / start
+   **********************/
+  function showStartScreen(){
+    startScreen.classList.remove('hidden');
+    quizCard.classList.add('hidden');
+    resultCard.classList.add('hidden');
+    rankingCard.classList.add('hidden');
+
+    // se existe estado salvo, habilita retomar
+    const st = loadState();
+    if(st) resumeBtn.classList.remove('hidden'); else resumeBtn.classList.add('hidden');
+  }
+
+  // inicia um novo jogo
+  function initNewQuiz(){
+    timePerQuestion = Number(timePerQuestionSel.value) || 20;
+    questions = shuffleArray([...ALL_QUESTIONS]).map(q => ({
+      text: q.text,
+      // vamos embaralhar opções mantendo index correto
+      options: shuffleArray(q.options.map((opt, idx) => ({ opt, idx })))
+    })).map(q=>{
+      // recuperar index da correta
+      // find original correct index (we'll map original ALL_QUESTIONS by text)
+      const original = ALL_QUESTIONS.find(originalQ => originalQ.text === q.text);
+      const correctIdxOriginal = ALL_QUESTIONS.indexOf(original) >=0 ? original.correct : 0;
+      // but above mapping is tricky; simpler approach: during map maintain correct value via matching:
+      return q;
+    });
+
+    // simpler rebuild: ensure correct mapping by rebuilding from ALL_QUESTIONS with shuffle
+    questions = shuffleArray(ALL_QUESTIONS).map(item => {
+      const shuffledOptions = shuffleArray(item.options.map((opt, idx)=> ({ opt, idx })));
+      // determine index in shuffledOptions where idx === item.correct
+      const correctShuffledIndex = shuffledOptions.findIndex(o => o.idx === item.correct);
+      return {
+        text: item.text,
+        options: shuffledOptions.map(o=>o.opt),
+        correct: correctShuffledIndex
+      };
+    });
+
+    currentIndex = 0;
+    score = 0;
+    wrongs = [];
+    remaining = timePerQuestion;
+    paused = false;
+    saveState();
+    openQuiz();
+  }
+
+  function openQuiz(){
+    startScreen.classList.add('hidden');
+    quizCard.classList.remove('hidden');
+    resultCard.classList.add('hidden');
+    rankingCard.classList.add('hidden');
+    renderQuestion();
+    startTimer();
+  }
+
+  /**********************
+   * Retomar (carregar estado salvo)
+   **********************/
+  function tryResume(){
+    const st = loadState();
+    if(!st) return alert('Nenhum progresso salvo.');
+    // recuperar perguntas (já vêm do storage)
+    questions = st.questions;
+    timePerQuestion = st.timePerQuestion || 20;
+    currentIndex = st.currentIndex || 0;
+    score = st.score || 0;
+    wrongs = st.wrongs || [];
+    remaining = st.remaining || timePerQuestion;
+    paused = !!st.paused;
+    timePerQuestionSel.value = timePerQuestion;
+    openQuiz();
+    resumeBtn.classList.add('hidden');
+  }
+
+  /**********************
+   * Render / lógica
+   **********************/
+  function renderQuestion(){
+    // verificar índice
+    if(currentIndex >= questions.length){
+      finishQuiz();
+      return;
+    }
+
+    const q = questions[currentIndex];
+    questionText.textContent = q.text;
+    optionsEl.innerHTML = '';
+
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn option-button bg-gray-50 border border-transparent rounded-xl px-4 py-3 text-left w-full flex items-center gap-3';
+      btn.innerHTML = `<span class="flex-1">${opt}</span><span class="ml-2 opacity-0 transition-opacity" aria-hidden="true"></span>`;
+      btn.dataset.index = i;
+
+      // teclado: Enter / Space
+      btn.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } });
+
+      btn.addEventListener('click', () => {
+        // se já desabilitado
+        if(btn.classList.contains('disabled')) return;
+        handleAnswer(i, btn);
+      });
+
+      optionsEl.appendChild(btn);
+    });
+
+    updateProgressUI();
+    scoreMini.textContent = `Acertos: ${score}`;
+    timerText.textContent = `Tempo: ${remaining}s`;
+    timerBar.style.width = `${(remaining/timePerQuestion)*100}%`;
+    nextBtn.classList.add('hidden');
+  }
+
+  function updateProgressUI(){
+    const pct = Math.round((currentIndex / questions.length) * 100);
+    progressBar.style.width = pct + '%';
+    progressText.textContent = `Questão ${Math.min(currentIndex+1, questions.length)} de ${questions.length} (${pct}%)`;
+  }
+
+  /**********************
+   * Temporizador
+   **********************/
+  function startTimer(){
+    stopTimer();
+    timerInterval = setInterval(() => {
+      if(paused) return;
+      remaining--;
+      if(remaining < 0) remaining = 0;
+      timerText.textContent = `Tempo: ${remaining}s`;
+      timerBar.style.width = `${(remaining/timePerQuestion)*100}%`;
+      saveState();
+
+      if(remaining === 0){
+        // tempo esgotou = contar como erro e avançar
+        markTimeout();
+      }
+    }, 1000);
+  }
+
+  function stopTimer(){
+    if(timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  }
+
+  function markTimeout(){
+    // revelar resposta correta e marcar erro
+    const q = questions[currentIndex];
+    const optionsButtons = [...optionsEl.children];
+    optionsButtons.forEach((btn, i) => {
+      btn.classList.add('disabled');
+      if(i === q.correct){
+        btn.classList.add('correct');
+        const icon = document.createElement('span'); icon.textContent = ' ✅'; btn.appendChild(icon);
+      }
+    });
+    // registrar como errado
+    wrongs.push({ question: q.text, chosen: null, correct: q.options[q.correct] });
+    nextBtn.classList.remove('hidden');
+    stopTimer();
+    saveState();
+  }
+
+  /**********************
+   * Resposta do usuário
+   **********************/
+  function handleAnswer(selectedIndex, btn){
+    const q = questions[currentIndex];
+    const buttons = [...optionsEl.children];
+    // desabilita todos
+    buttons.forEach(b => { b.classList.add('disabled'); });
+    // marca seleção
+    if(selectedIndex === q.correct){
+      btn.classList.add('correct');
+      btn.style.background = '#dcfce7';
+      score++;
+      const tick = document.createElement('span'); tick.textContent = ' ✅'; tick.className='ml-2'; btn.appendChild(tick);
+    } else {
+      btn.classList.add('incorrect');
+      btn.style.background = '#fee2e2';
+      const cross = document.createElement('span'); cross.textContent = ' ❌'; cross.className='ml-2'; btn.appendChild(cross);
+      // mostra o correto
+      const correctBtn = buttons[q.correct];
+      if(correctBtn){
+        correctBtn.classList.add('correct');
+        const tick = document.createElement('span'); tick.textContent = ' ✅'; tick.className='ml-2'; correctBtn.appendChild(tick);
+      }
+      wrongs.push({ question: q.text, chosen: q.options[selectedIndex], correct: q.options[q.correct] });
+    }
+
+    // pequeno delay para salvar e permitir ver o feedback
+    stopTimer();
+    nextBtn.classList.remove('hidden');
+    saveState();
+  }
+
+  /**********************
+   * navegar próximas / pular / sair
+   **********************/
+  nextBtn.addEventListener('click', () => {
+    currentIndex++;
+    remaining = timePerQuestion;
+    saveState();
+    if(currentIndex < questions.length){
+      renderQuestion();
+      startTimer();
+    } else {
+      finishQuiz();
+    }
+  });
+
+  skipBtn.addEventListener('click', () => {
+    // marcar como pulo = tratado como errada sem chosen
+    const q = questions[currentIndex];
+    wrongs.push({ question: q.text, chosen: null, correct: q.options[q.correct] });
+    currentIndex++;
+    remaining = timePerQuestion;
+    saveState();
+    if(currentIndex < questions.length){
+      renderQuestion();
+      startTimer();
+    } else {
+      finishQuiz();
+    }
+  });
+
+  quitBtn.addEventListener('click', () => {
+    if(confirm('Deseja realmente sair e salvar seu progresso para retomar depois?')) {
+      saveState();
+      showStartScreen();
+    }
+  });
+
+  /**********************
+   * Finalizar quiz / resultados
+   **********************/
+  function finishQuiz(){
+    stopTimer();
+    saveState(); // guarda estado final
+    // mostrar resultados
+    quizCard.classList.add('hidden');
+    resultCard.classList.remove('hidden');
+
+    finalScore.textContent = score;
+    totalQ.textContent = questions.length;
+    // mensagem personalizada
+    const pct = Math.round((score / questions.length) * 100);
+    let msg = '';
+    if(pct === 100) msg = 'Perfeito! Você domina o assunto. 👏';
+    else if(pct >= 80) msg = 'Excelente! Muito bem.';
+    else if(pct >= 50) msg = 'Bom trabalho — continue praticando.';
+    else msg = 'Não desanime — prática leva à melhora!';
+
+    resultMsg.textContent = msg;
+
+    // lista de erradas
+    wrongList.innerHTML = '';
+    if(wrongs.length){
+      const h = document.createElement('h4'); h.className='font-semibold text-red-600'; h.textContent = 'Questões que você errou:'; wrongList.appendChild(h);
+      wrongs.forEach(w => {
+        const div = document.createElement('div');
+        div.className = 'mt-2 p-3 bg-red-50 rounded';
+        div.innerHTML = `<p class="text-sm"><strong>❓ ${w.question}</strong></p>
+                         <p class="text-xs text-red-600">Sua resposta: ${w.chosen ?? '— (não respondeu)'}</p>
+                         <p class="text-xs text-green-700">Resposta certa: ${w.correct}</p>`;
+        wrongList.appendChild(div);
+      });
+    } else {
+      const p = document.createElement('p'); p.className='text-green-700 font-semibold'; p.textContent = '🎉 Você não errou nenhuma questão!';
+      wrongList.appendChild(p);
+    }
+
+    // salvar histórico e limpar estado salvo
+    addHistoryEntry(score);
+    clearState();
+    renderRanking(); // atualiza ranking na memória
+  }
+
+  /**********************
+   * Compartilhar / ranking
+   **********************/
+  shareBtn.addEventListener('click', async () => {
+    const text = `Fiz o Quiz e acertei ${score} de ${questions.length} perguntas!`;
+    if(navigator.share){
+      try { await navigator.share({ title:'Meu resultado', text }); }
+      catch(e){ alert('Compartilhamento cancelado.'); }
+    } else {
+      // fallback: link whatsapp
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+  });
+
+  tryAgainBtn.addEventListener('click', () => { initNewQuiz(); });
+  backHomeBtn.addEventListener('click', () => { showStartScreen(); });
+
+  viewRankingBtn.addEventListener('click', () => {
+    startScreen.classList.add('hidden');
+    quizCard.classList.add('hidden');
+    resultCard.classList.add('hidden');
+    rankingCard.classList.remove('hidden');
+    renderRanking();
+  });
+
+  closeRankingBtn.addEventListener('click', () => {
+    showStartScreen();
+  });
+
+  clearRankingBtn.addEventListener('click', () => {
+    if(confirm('Limpar todo o histórico de pontuações?')) {
+      localStorage.removeItem(HISTORY_KEY);
+      renderRanking();
+    }
+  });
+
+  function renderRanking(){
+    const hist = getHistory();
+    rankingList.innerHTML = '';
+    if(!hist.length){
+      rankingList.innerHTML = '<p class="text-gray-500">Nenhuma pontuação registrada.</p>';
+      return;
+    }
+    hist.forEach((h, i) => {
+      const li = document.createElement('li');
+      const date = new Date(h.date);
+      li.className = 'py-2 border-b last:border-b-0';
+      li.innerHTML = `<strong>#${i+1}</strong> — <span class="ml-2 font-semibold">${h.score}/${h.total}</span> <span class="ml-2 text-xs text-gray-500">(${date.toLocaleString()})</span>`;
+      rankingList.appendChild(li);
+    });
+  }
+  
+  /**********************
+   * Início / eventos de UI
+   **********************/
+  startBtn.addEventListener('click', () => { initNewQuiz(); });
+  resumeBtn.addEventListener('click', tryResume);
+  timePerQuestionSel.addEventListener('change', (e) => { /* só muda na nova sessão */ });
+
+  // checar se existe estado salvo para habilitar retomar
+  (function init(){
+    const st = loadState();
+    if(st) resumeBtn.classList.remove('hidden'); else resumeBtn.classList.add('hidden');
+    renderRanking();
+  })();
+
+  </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
