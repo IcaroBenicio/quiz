@@ -23,7 +23,7 @@
 
     <!-- START SCREEN -->
     <section id="startScreen" class="bg-white rounded-xl shadow-lg p-8 text-center">
-      <h1 class="text-3xl font-bold text-sky-700 mb-2">Quiz Avançado de Português</h1>
+      <h1 class="text-3xl font-bold text-sky-700 mb-2">Quiz Avançado de Geografia</h1>
       <p class="text-gray-600 mb-6">Teste seus conhecimentos — perguntas aleatórias, tempo por pergunta e ranking local.</p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -127,1010 +127,627 @@
 
   // perguntas originais (pode ampliar)
   const ALL_QUESTIONS = [
-       {
-      "text": "Em qual alternativa o verbo está na voz passiva analítica?",
-      "options": [
-        "O atleta feriu-se durante o treino.",
-        "O projeto foi aprovado pela comissão.",
-        "Reformam-se apartamentos antigos.",
-        "O governo resolveu o problema rapidamente."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Ao transformar a frase 'O aluno fez a tarefa.' para a voz passiva sintética, a forma correta é:",
-      "options": [
-        "A tarefa foi feita pelo aluno.",
-        "Fez-se a tarefa pelo aluno.",
-        "Fez-se a tarefa.",
-        "Fizeram-se as tarefas."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O 'se' atua como Índice de Indeterminação do Sujeito (IIS) em qual das frases?",
-      "options": [
-        "Vende-se casa na praia.",
-        "Trabalha-se muito neste escritório.",
-        "Resolveram-se os problemas da equipe.",
-        "O réu entregou-se à polícia."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual a voz do verbo em 'Os vizinhos cumprimentaram-se calorosamente na rua'?",
-      "options": [
-        "Voz ativa",
-        "Voz passiva analítica",
-        "Voz reflexiva",
-        "Voz reflexiva recíproca"
-      ],
-      "correct": 3
-    },
-    {
-      "text": "Qual a forma correta da frase 'Os alunos prepararam a festa' na voz passiva analítica?",
-      "options": [
-        "Preparou-se a festa pelos alunos.",
-        "A festa foi preparada pelos alunos.",
-        "Os alunos foram preparados para a festa.",
-        "Prepara-se a festa."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "A voz do verbo em 'O problema parecia insolúvel para a equipe' é:",
-      "options": [
-        "Voz ativa",
-        "Voz passiva",
-        "Voz reflexiva",
-        "Voz indeterminada"
-      ],
-      "correct": 0
-    },
-    {
-      "text": "Qual é a classificação da voz verbal na frase 'Os candidatos submeteram-se ao exame rigoroso'?",
-      "options": [
-        "Voz ativa com objeto direto reflexivo",
-        "Voz passiva sintética",
-        "Voz reflexiva",
-        "Voz passiva analítica"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual a principal característica do Discurso Indireto Livre?",
-      "options": [
-        "Uso de aspas e travessão para marcar a fala do personagem.",
-        "A fala do personagem é reproduzida pelo narrador, sem mistura de vozes.",
-        "Mistura da voz do narrador e do personagem, sem o uso de verbos de elocução explícitos ou pontuação marcante.",
-        "O narrador apenas relata os fatos, sem incluir pensamentos do personagem."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Ao transformar a frase em Discurso Indireto: 'O funcionário perguntou: 'Posso sair mais cedo hoje?'', a forma correta é:",
-      "options": [
-        "O funcionário perguntou se podia sair mais cedo hoje.",
-        "O funcionário perguntou que se podia sair mais cedo naquele dia.",
-        "O funcionário perguntou se podia sair mais cedo naquele dia.",
-        "O funcionário perguntou se eu poderia sair mais cedo naquele dia."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Identifique a única frase que está em Discurso Direto.",
-      "options": [
-        "O orador explicou que a crise econômica era passageira.",
-        "O orador: a crise econômica era passageira. (pensou a plateia)",
-        "O orador afirmou: 'A crise econômica é passageira.'",
-        "A crise econômica, sim, passageira, disse o orador para os presentes."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Na passagem para o Discurso Indireto, o Futuro do Presente ('Eu viajarei amanhã.') se transforma em:",
-      "options": [
-        "Presente do Indicativo",
-        "Futuro do Pretérito",
-        "Pretérito Perfeito",
-        "Pretérito Mais-que-perfeito"
-      ],
-      "correct": 1
-    },
-    {
-      "text": "A frase 'Ele não aguentava mais! Tinha que sair daquele lugar.' (pensamento do personagem inserido na narrativa sem pontuação de diálogo) é um exemplo de:",
-      "options": [
-        "Discurso Indireto Simples",
-        "Discurso Direto",
-        "Citação direta",
-        "Discurso Indireto Livre"
-      ],
-      "correct": 3
-    },
-    {
-      "text": "Qual dos verbos de elocução (ou dicendi) seria mais adequado para introduzir uma dúvida no Discurso Indireto?",
-      "options": [
-        "Afirmar",
-        "Gritar",
-        "Indagar",
-        "Sussurrar"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Ao converter a ordem 'O professor disse: 'Façam o exercício agora!'' para o Discurso Indireto, qual a forma correta?",
-      "options": [
-        "O professor disse para os alunos que fizessem o exercício agora.",
-        "O professor ordenou que eles fizessem o exercício naquele momento.",
-        "O professor disse que eles farão o exercício agora.",
-        "O professor perguntou se eles fariam o exercício naquele momento."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "O que a Progressão com Tópico Constante (ou Linear) realiza em um parágrafo?",
-      "options": [
-        "O rema de uma oração se torna o tema da oração seguinte.",
-        "Repetição da mesma informação sem adicionar nada novo.",
-        "O mesmo tema é mantido, mas a cada oração uma nova informação (rema) é adicionada sobre ele.",
-        "A apresentação de uma ideia principal no final do parágrafo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual a principal função dos elementos de *coesão referencial* em um texto?",
-      "options": [
-        "Estabelecer a relação de sentido lógico (causa, consequência, oposição) entre as frases.",
-        "Ligar as orações através de conjunções e advérbios conectivos.",
-        "Evitar repetições desnecessárias, retomando termos já citados através de pronomes, sinônimos ou elipses.",
-        "Garantir que as ideias apresentadas não sejam contraditórias e mantenham a lógica."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A ausência de Progressão Textual, onde um texto repete a mesma ideia de forma circular sem introduzir informações novas, é um problema de:",
-      "options": [
-        "Incoerência",
-        "Coesão sequencial",
-        "Circularidade ou Tópico Nulo",
-        "Vagueza"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual conectivo é essencial para estabelecer uma *relação de causa* na coesão sequencial?",
-      "options": [
-        "Portanto",
-        "Contudo",
-        "Visto que",
-        "Embora"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Em 'João gosta de História. Esta disciplina é fundamental para a cidadania.', o termo 'Esta disciplina' é um mecanismo de coesão que retoma 'História'. Que tipo de coesão é essa?",
-      "options": [
-        "Coesão sequencial",
-        "Coesão referencial por substituição",
-        "Coesão por elipse",
-        "Coesão por repetição"
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual a relação entre coerência e progressão textual?",
-      "options": [
-        "Coerência é a progressão textual em textos narrativos; a coesão é em textos dissertativos.",
-        "A coerência se relaciona apenas à gramática do texto, enquanto a progressão se refere ao sentido.",
-        "A coerência é uma condição para a progressão; um texto incoerente não pode progredir de forma lógica.",
-        "São termos sinônimos, ambos se referindo à organização das orações no parágrafo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A Progressão com Tópicos Derivados (ou em cadeia) é mais adequada para qual objetivo textual?",
-      "options": [
-        "Desenvolver a ideia central de um parágrafo por meio de detalhes sucessivos.",
-        "Apresentar uma lista de fatos ou argumentos de forma desordenada.",
-        "Explicar um processo, uma sequência cronológica de eventos ou uma definição que se desdobra.",
-        "Mudar radicalmente o tema do texto, introduzindo um novo parágrafo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual adjetivo foi derivado de um substantivo?",
-      "options": [
-        "Compreensível",
-        "Limpável",
-        "Maternal",
-        "Vidente"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O adjetivo 'perigoso' foi derivado de qual palavra primitiva e qual classe gramatical?",
-      "options": [
-        "Perigo (Substantivo)",
-        "Perigar (Verbo)",
-        "Perigavelmente (Advérbio)",
-        "Perigo (Adjetivo Primitivo)"
-      ],
-      "correct": 0
-    },
-    {
-      "text": "Qual adjetivo foi derivado do verbo 'falar' e expressa a qualidade de algo que pode ser falado?",
-      "options": [
-        "Falatório",
-        "Falange",
-        "Infalível",
-        "Falável"
-      ],
-      "correct": 3
-    },
-    {
-      "text": "A palavra 'incerteza' foi formada a partir do adjetivo 'certo'. Qual classe gramatical do derivado 'incerteza'?",
-      "options": [
-        "Advérbio",
-        "Verbo",
-        "Substantivo Abstrato",
-        "Adjetivo"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual dos adjetivos abaixo é um adjetivo pátrio (ou gentílico) derivado?",
-      "options": [
-        "Milenar",
-        "Americano",
-        "Fraternal",
-        "Amarelado"
-      ],
-      "correct": 1
-    },
-    {
-      "text": "O adjetivo 'desleal' é formado a partir do adjetivo 'leal' pelo processo de:",
-      "options": [
-        "Derivação Sufixal",
-        "Composição por Justaposição",
-        "Derivação Prefixal",
-        "Derivação Parassintética"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual dos adjetivos compostos a seguir mantém invariável o segundo elemento?",
-      "options": [
-        "Olhos verde-escuros",
-        "Camisas azul-celeste",
-        "Móveis castanho-claros",
-        "Ternos cinza-claros"
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Um Período Composto por Coordenação é caracterizado por orações que são:",
-      "options": [
-        "Dependentes sintaticamente uma da outra.",
-        "Sintaticamente independentes, unidas ou não por uma conjunção coordenativa.",
-        "Orações que funcionam como termos da outra (sujeito, objeto, adjunto, etc.).",
-        "Sempre separadas apenas por vírgulas, sem o uso de conectivos."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual a classificação da oração coordenada sublinhada em: 'Não só estudei o tema, *como também fiz um resumo*.'?",
-      "options": [
-        "Coordenada Sindética Alternativa",
-        "Coordenada Sindética Explicativa",
-        "Coordenada Sindética Aditiva",
-        "Coordenada Sindética Adversativa"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O Período Composto por Coordenação 'Ou você me diz a verdade, ou eu saio imediatamente.' é formado por orações coordenadas sindéticas:",
-      "options": [
-        "Adversativas",
-        "Alternativas",
-        "Conclusivas",
-        "Explicativas"
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual a classificação correta da oração: 'Cumpra suas tarefas, *pois o prazo está acabando*.'?",
-      "options": [
-        "Coordenada Sindética Aditiva",
-        "Coordenada Sindética Conclusiva",
-        "Coordenada Sindética Explicativa",
-        "Coordenada Assindética"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Na frase 'Ele trabalha, estuda, lê bastante.', as orações são coordenadas:",
-      "options": [
-        "Sindéticas Conclusivas",
-        "Sindéticas Aditivas",
-        "Assindéticas",
-        "Sindéticas Explicativas"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A conjunção 'entretanto' pertence a qual grupo de conjunções coordenativas?",
-      "options": [
-        "Aditivas",
-        "Explicativas",
-        "Conclusivas",
-        "Adversativas"
-      ],
-      "correct": 3
-    },
-    {
-      "text": "Qual das opções abaixo contém um Período Composto por Coordenação, e não Subordinação?",
-      "options": [
-        "É fundamental que você revise a matéria.",
-        "Acredito que ele passará na prova.",
-        "Quero estudar mais, mas não tenho tempo.",
-        "Os alunos, que estavam cansados, foram embora mais cedo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual o principal objetivo de se fazer uma *paráfrase* de um texto?",
-      "options": [
-        "Alterar a ideia original do autor para expressar uma nova opinião.",
-        "Resumir o texto, mantendo a linguagem técnica original.",
-        "Reproduzir o sentido do texto original com outras palavras, geralmente para torná-lo mais claro ou acessível.",
-        "Copiar trechos do texto original, inserindo aspas e a fonte."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Paráfrase e Resumo se diferenciam principalmente em relação ao(à):",
-      "options": [
-        "Fidelidade ao texto original, pois apenas a paráfrase exige fidelidade.",
-        "Manutenção da forma original do texto (estrutura e pontuação).",
-        "Tamanho do texto final: a paráfrase pode manter ou expandir, o resumo obrigatoriamente reduz.",
-        "Uso de conectivos, que é exclusivo da paráfrase."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual das opções é a melhor paráfrase para a frase: 'A persistência é o caminho do êxito.'?",
-      "options": [
-        "O êxito é o resultado inevitável da persistência.",
-        "É necessário esforço, pois o sucesso não vem facilmente.",
-        "A insistência e a constância nos conduzem ao sucesso e à realização.",
-        "Somente os persistentes chegam ao final do caminho."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O que a paráfrase de um texto literário *não* deve fazer, em relação ao original?",
-      "options": [
-        "Tornar o texto mais simples e de fácil leitura.",
-        "Perder a forma original do texto (métrica, rima, ritmo).",
-        "Alterar o tom ou a emoção central do poema ou da narrativa.",
-        "Usar o vocabulário do próprio autor em algumas passagens."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual a principal aplicação da paráfrase no contexto acadêmico e de estudos?",
-      "options": [
-        "Provar que você encontrou a fonte original do texto.",
-        "Demonstrar a compreensão de um conceito complexo, reescrevendo-o com suas próprias palavras.",
-        "Reduzir o número de páginas do trabalho para atender a um limite de palavras.",
-        "Adicionar comentários e críticas pessoais à obra de outro autor."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual é a paráfrase mais adequada para o provérbio: 'De grão em grão, a galinha enche o papo.'?",
-      "options": [
-        "A paciência é importante, pois a galinha precisa de tempo para comer.",
-        "A galinha enche seu papo comendo muitos grãos, um de cada vez.",
-        "Os grandes objetivos são alcançados por meio de esforços pequenos e contínuos.",
-        "O papo da galinha não deve ser enchido de uma vez só."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A paráfrase é um recurso importante para evitar qual problema na escrita acadêmica?",
-      "options": [
-        "Erros de concordância verbal.",
-        "O uso excessivo de adjetivos derivados.",
-        "A falta de progressão textual.",
-        "O plágio, ao reescrever ideias de outros autores sem copiar a forma."
-      ],
-      "correct": 3
-    },
-    {
-      "text": "Em interpretação textual, o que se entende por *inferência*?",
-      "options": [
-        "A identificação da tese ou ideia principal do autor.",
-        "A dedução ou conclusão de uma informação que não está explícita, mas é sugerida pelo texto.",
-        "A reprodução de um trecho do texto com as mesmas palavras.",
-        "A análise da estrutura gramatical e do vocabulário utilizado."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual a diferença crucial entre *compreensão* e *interpretação* de texto?",
-      "options": [
-        "A compreensão é subjetiva e a interpretação é objetiva.",
-        "A compreensão analisa o que está *implícito* e a interpretação o que está *explícito*.",
-        "A compreensão foca no que está *escrito* (o texto em si); a interpretação foca no que se pode *deduzir* (a relação do texto com o contexto).",
-        "A compreensão é aplicada a textos narrativos e a interpretação a textos dissertativos."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O que o leitor deve buscar para determinar a *intencionalidade* ou o *objetivo* de um texto?",
-      "options": [
-        "A função sintática de todos os termos gramaticais.",
-        "A presença ou ausência de verbos na voz passiva.",
-        "A ideia central, o tipo de linguagem e o público-alvo a que se destina.",
-        "O número exato de orações coordenadas e subordinadas."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual a função da linguagem predominante em um artigo de opinião que busca convencer o leitor a respeito de um ponto de vista?",
-      "options": [
-        "Função Referencial",
-        "Função Emotiva",
-        "Função Conativa (ou Apelativa)",
-        "Função Fática"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Ao analisar um texto, a *ideia central* é:",
-      "options": [
-        "A primeira oração do primeiro parágrafo, que sempre é o tópico frasal.",
-        "O tema geral, a tese ou o ponto principal sobre o qual todas as outras informações se articulam.",
-        "Qualquer argumento que o autor utilize para sustentar sua opinião.",
-        "Uma opinião do leitor sobre o assunto abordado."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual estratégia é mais eficaz para a identificação do tema e das ideias centrais em um texto longo?",
-      "options": [
-        "Contar o número de parágrafos e dividir pelo número de frases.",
-        "Buscar as palavras-chave e seus sinônimos que se repetem com frequência ao longo dos parágrafos.",
-        "Prestar atenção apenas nas conjunções coordenativas adversativas e conclusivas.",
-        "Focar apenas nas informações contidas nos parênteses e nas notas de rodapé."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Em um texto dissertativo-argumentativo, o que se espera que a *tese* do autor cumpra?",
-      "options": [
-        "Ser uma simples descrição do cenário apresentado.",
-        "Apresentar a opinião do autor sobre o tema, um ponto de vista a ser defendido ao longo do texto.",
-        "Fazer um resumo de todas as ideias secundárias do desenvolvimento.",
-        "Utilizar exclusivamente orações coordenadas assindéticas para expressar a opinião."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Em um texto, a presença de advérbios como 'infelizmente', 'certamente', 'aparentemente' (elementos de modalização) serve para:",
-      "options": [
-        "Garantir a progressão com tópico constante.",
-        "Revelar a perspectiva, a atitude ou o grau de certeza do locutor sobre o que está sendo dito.",
-        "Criar um período composto por coordenação, unindo orações independentes.",
-        "Alterar o tempo verbal da voz ativa para a voz passiva."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Ao converter a frase 'O técnico se arrependeu de sua escolha' para a voz ativa, o pronome 'se' mantém a função de partícula apassivadora ou índice de indeterminação do sujeito?",
-      "options": [
-        "Partícula Apacivadora, pois 'arrepender' é transitivo direto.",
-        "Índice de Indeterminação do Sujeito, pois o sujeito é desconhecido.",
-        "Não se aplica, pois 'arrepender-se' é um verbo pronominal inerente, e a frase já está na voz ativa.",
-        "É um objeto direto reflexivo, o que a torna passiva."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Na frase 'Procedeu-se à investigação dos fatos', o 'se' é corretamente classificado como:",
-      "options": [
-        "Partícula Apacivadora (PA), pois o objeto é direto.",
-        "Pronome Reflexivo Recíproco (PRR), indicando ação mútua.",
-        "Índice de Indeterminação do Sujeito (IIS), devido ao verbo ser transitivo indireto (VTI).",
-        "Objeto Direto, pois 'proceder' é um verbo de ligação."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A voz passiva analítica 'A decisão será revisada pelo comitê' tem como voz passiva sintética correspondente a forma:",
-      "options": [
-        "Revisam-se a decisão pelo comitê.",
-        "Revisar-se-á a decisão.",
-        "O comitê revisará a decisão.",
-        "Revisou-se a decisão."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual das alternativas abaixo apresenta um verbo na voz reflexiva recíproca, mas com sentido de reciprocidade indireta?",
-      "options": [
-        "Os atletas feriram-se gravemente no jogo.",
-        "Os noivos trocaram-se presentes caros.",
-        "Os colegas abraçaram-se após a vitória.",
-        "Os rivais cumprimentaram-se protocolarmente."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "O único caso de 'se' que não permite a conversão para a voz passiva analítica é o que atua como:",
-      "options": [
-        "Pronome Apassivador com Objeto Direto (OD).",
-        "Pronome Reflexivo com Verbo Transitivo Direto.",
-        "Índice de Indeterminação do Sujeito (IIS) com Verbo Transitivo Indireto (VTI).",
-        "Partícula integrante do verbo (PIV)."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual a conversão mais precisa para o Discurso Indireto da frase: 'O líder: 'Se eu puder, resolverei isso antes que o dia termine.''?",
-      "options": [
-        "O líder disse que, se ele puder, resolverá aquilo antes que o dia termine.",
-        "O líder avisou que, se pudesse, resolveria aquilo antes que o dia terminasse.",
-        "O líder disse que, se podia, resolveria isso antes que o dia terminasse.",
-        "O líder informou que, se puder, ele resolverá isso antes que o dia termine."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Identifique a passagem que demonstra claramente o uso do Discurso Indireto Livre:",
-      "options": [
-        "Ele se afastou. Aquele lugar era insuportável, não havia mais o que fazer ali.",
-        "Ele se afastou e pensou: 'Aquele lugar é insuportável, não há mais o que fazer aqui.'",
-        "Ele se afastou e disse que aquele lugar era insuportável e não havia mais o que fazer ali.",
-        "Ele se afastou, pois o lugar, segundo sua opinião, era insuportável."
-      ],
-      "correct": 0
-    },
-    {
-      "text": "O verbo de elocução 'sugerir' introduz o discurso indireto. Qual o modo verbal mais comum e adequado para a oração subordinada que segue?",
-      "options": [
-        "Infinitivo (Ex: 'sugeriu fazer').",
-        "Indicativo (Ex: 'sugeriu que fazia').",
-        "Subjuntivo (Ex: 'sugeriu que fizesse').",
-        "Imperativo (Ex: 'sugeriu faça')."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Na conversão de uma ordem ou pedido (Imperativo) para o Discurso Indireto, qual tempo e modo verbal são utilizados?",
-      "options": [
-        "Pretérito Perfeito do Indicativo.",
-        "Futuro do Presente do Indicativo.",
-        "Pretérito Imperfeito do Subjuntivo.",
-        "Presente do Subjuntivo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A transposição da frase 'O réu negou: 'Nunca estive naquele local.'' para o Discurso Indireto deve resultar em:",
-      "options": [
-        "O réu negou que nunca esteve naquele local.",
-        "O réu negou que jamais teria estado naquele local.",
-        "O réu negou que jamais estivera naquele local.",
-        "O réu negou que tinha estado naquele local."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A Progressão com Tópicos Derivados (em cadeia) é a mais indicada para qual tipo de desenvolvimento textual?",
-      "options": [
-        "Apresentação de uma série de argumentos desconectados.",
-        "Definição de um conceito por meio da desintegração de seus componentes.",
-        "Manutenção de um único sujeito e a atribuição de novas características a ele.",
-        "Retomada da mesma ideia com reformulações superficiais (circularidade)."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Em um texto, a repetição excessiva de substantivos ou sintagmas nominais, sem o uso de pronomes, sinônimos ou elipse, compromete o mecanismo de:",
-      "options": [
-        "Coerência sintática.",
-        "Coesão referencial por substituição.",
-        "Progressão com tópico derivado.",
-        "Coesão sequencial por conjunção."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "O que a ausência do 'tópico frasal' e a repetição de um mesmo 'rema' nas orações de um parágrafo podem indicar?",
-      "options": [
-        "Um texto bem estruturado em progressão linear.",
-        "Um problema de circularidade (tópico nulo).",
-        "Uma coesão sequencial bem definida.",
-        "Um texto com predominância da função conativa."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual das seguintes frases demonstra uma progressão textual por *Tópico Constante*?",
-      "options": [
-        "O presidente propôs uma reforma. Esta reforma foi criticada pela oposição.",
-        "Os dados foram analisados. A análise demonstrou resultados surpreendentes. Tais resultados levaram à mudança de estratégia.",
-        "O livro de Machado de Assis é complexo. O autor utiliza a ironia. O narrador é um narrador cínico.",
-        "A seca atingiu a região. A falta de água levou à perda das colheitas. Por isso, a população migrou."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual conectivo de *coesão sequencial* introduz uma oração coordenada que não pode ter sua posição alterada no período sem perda de sentido?",
-      "options": [
-        "Contudo (adversativa).",
-        "Ou (alternativa).",
-        "Portanto (conclusiva).",
-        "Pois (explicativa, antes do verbo)."
-      ],
-      "correct": 3
-    },
-    {
-      "text": "Qual adjetivo composto, derivado de um substantivo, NÃO deve ser flexionado em número?",
-      "options": [
-        "Tecidos rubro-negros.",
-        "Cabelos castanho-claros.",
-        "Vestidos amarelo-ouro.",
-        "Estofados verde-escuros."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O adjetivo 'subterrâneo' é classificado, quanto à derivação, como:",
-      "options": [
-        "Sufixal, a partir do substantivo 'terra'.",
-        "Prefixal, a partir do substantivo 'sub'.",
-        "Parassintética, a partir do substantivo 'terra'.",
-        "Sufixal e Prefixal, a partir do adjetivo 'terreno'."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual dos adjetivos abaixo foi derivado por processo *prefixal e sufixal*, mas NÃO por parassíntese?",
-      "options": [
-        "Desumano",
-        "Envelhecido",
-        "Desalmado",
-        "Desleal"
-      ],
-      "correct": 2
-    },
-    {
-      "text": "O adjetivo 'capaz' tem sua forma mais comum de substantivo abstrato derivado em:",
-      "options": [
-        "Capacitário (Adjetivo).",
-        "Capacidade (Substantivo).",
-        "Capabilismo (Substantivo).",
-        "Capável (Adjetivo)."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual adjetivo derivado exprime a ideia de 'sem' (privação ou ausência)?",
-      "options": [
-        "Territorial (Sufixo '-ial').",
-        "Medroso (Sufixo '-oso').",
-        "Imoral (Prefixo 'i-').",
-        "Duvidoso (Sufixo '-oso')."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual é a relação de sentido exata na coordenada sindética do período: 'Não me chamaram à reunião, tampouco me enviaram a ata.'?",
-      "options": [
-        "Alternância.",
-        "Oposição.",
-        "Adição com ideia de negação ou exclusão.",
-        "Conclusão."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Na frase: 'Estou cansado; logo, não irei à festa', o termo 'logo' atua como:",
-      "options": [
-        "Advérbio de tempo, assinalando a consequência.",
-        "Conjunção coordenativa conclusiva, ligando orações independentes.",
-        "Conjunção subordinativa consecutiva, iniciando uma oração subordinada.",
-        "Pronome relativo, retomando o termo anterior."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Em qual período a oração coordenada sindética explicativa pode ser substituída por uma oração subordinada causal sem alteração de sentido?",
-      "options": [
-        "Não chore, pois o show já vai começar.",
-        "Ele estava doente, pois não veio trabalhar hoje.",
-        "Ora estuda, ora trabalha, ora descansa.",
-        "O clima estava seco, mas conseguimos irrigar a plantação."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "O que distingue a oração 'Estude mais' (assindética) de 'Estude mais, que o exame está próximo' (sindética explicativa)?",
-      "options": [
-        "A primeira é uma oração coordenada, e a segunda é subordinada adverbial.",
-        "A primeira é uma oração absoluta, e a segunda é coordenada.",
-        "A segunda oração adiciona uma explicação ou justificativa à ordem da primeira.",
-        "A segunda oração estabelece uma relação de oposição."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Identifique a única oração que estabelece uma relação de coordenação e não subordinação:",
-      "options": [
-        "Embora fosse tarde, ele continuou o trabalho.",
-        "Ele prometeu que voltaria logo.",
-        "Ele se atrasou, contudo, chegou a tempo de assinar.",
-        "Viveremos melhor à medida que o tempo passar."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual das opções é a paráfrase mais adequada para a metáfora: 'A arte é o espelho que a alma reflete.'?",
-      "options": [
-        "A alma é um reflexo da arte que a pessoa consome.",
-        "A arte tem a função de ser o espelho da realidade e da sociedade.",
-        "A expressão artística serve como uma manifestação visível e sincera dos sentimentos e pensamentos interiores.",
-        "O artista utiliza a arte para criar espelhos de sua própria alma."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual a principal falha na fidelidade de uma paráfrase em relação ao texto original?",
-      "options": [
-        "A alteração do vocabulário, tornando o texto mais técnico.",
-        "A manutenção da estrutura sintática original.",
-        "A mudança do tom do autor (por exemplo, de crítico para elogioso).",
-        "A citação da fonte original, o que a torna um resumo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Um leitor encontra a informação explícita: '15% dos entrevistados apoiam a medida X'. A conclusão 'a maioria não apoia a medida X' é um exemplo de:",
-      "options": [
-        "Compreensão literal.",
-        "Paráfrase.",
-        "Inferência (Interpretação).",
-        "Extrapolação incorreta."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Em um dicionário, o verbete que explica o significado de uma palavra é um exemplo de texto com predomínio da função da linguagem:",
-      "options": [
-        "Conativa (foco no receptor).",
-        "Emotiva (foco no emissor).",
-        "Referencial (foco no contexto).",
-        "Metalinguística (foco no código)."
-      ],
-      "correct": 3
-    },
-    {
-      "text": "O que caracteriza uma *extrapolação* no processo de interpretação textual, tornando-a um erro?",
-      "options": [
-        "A manutenção da ideia original, mas com o uso de novas palavras.",
-        "A dedução lógica de uma informação implícita, mas evidente no texto.",
-        "A introdução de ideias externas ou a conclusão de algo não sugerido ou não contido no universo do texto.",
-        "A leitura literal e superficial, sem análise profunda."
-      ],
-      "correct": 2
-    },
-        {
-      "text": "Qual das frases abaixo apresenta o verbo na *voz passiva sintética*, mas com o sujeito paciente indeterminado?",
-      "options": [
-        "Reviu-se o acordo rapidamente.",
-        "Não se deve mentir em juízo.",
-        "Assistiu-se aos jogos com entusiasmo.",
-        "Faziam-se os pagamentos pela manhã."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Se a frase 'O gerente deu as instruções à equipe.' for convertida para a voz passiva analítica com foco no *Objeto Indireto*, qual seria a forma resultante?",
-      "options": [
-        "As instruções foram dadas à equipe pelo gerente.",
-        "O gerente foi dado de instruções pela equipe.",
-        "A equipe foi dada as instruções pelo gerente.",
-        "A equipe recebeu as instruções do gerente."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A voz verbal em 'O réu se declarou inocente no tribunal' é classificada como:",
-      "options": [
-        "Voz passiva sintética.",
-        "Voz reflexiva, pois o pronome atua como Objeto Direto (se = a si mesmo).",
-        "Voz ativa com pronome reflexivo inerente.",
-        "Voz ativa com o 'se' como Partícula Expletiva (de realce)."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "O único pronome oblíquo átono que pode atuar como *sujeito* (em voz ativa) em uma construção de Discurso Indireto é:",
-      "options": [
-        "O 'me' (Ex: 'Ouvi-me falar').",
-        "O 'o' (Ex: 'Viu-o sair').",
-        "O 'lhe' (Ex: 'Mandou-lhe chegar').",
-        "O 'se' (Ex: 'Acreditou-se ser verdade')."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual a conversão mais fiel e correta para o Discurso Indireto da frase: 'O professor advertiu: 'Cuidado, é possível que haja novas provas amanhã.''?",
-      "options": [
-        "O professor advertiu para ter cuidado, que era possível haver novas provas amanhã.",
-        "O professor advertiu que era possível que tivessem novas provas no dia seguinte.",
-        "O professor advertiu que tivessem cuidado, pois era possível que houvesse novas provas no dia seguinte.",
-        "O professor advertiu que era possível que haja novas provas no dia seguinte."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A frase 'O autor não percebeu. Ele era um tolo!' inserida na narração, mantendo a entonação original do narrador (crítica/juízo), é um exemplo de Discurso:",
-      "options": [
-        "Direto Incompleto.",
-        "Indireto Livre com Modalização.",
-        "Indireto com Verbo de Elocução Implícito.",
-        "Direto com Elipse."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual oração coordenada estabelece uma relação de *oposição qualitativa* (e não meramente quantitativa) e exige vírgula antes da conjunção?",
-      "options": [
-        "Não apenas comeu, mas também bebeu em excesso.",
-        "O time jogou bem, todavia, o resultado foi desfavorável.",
-        "Trabalha muito, ou seja, tem garantido o seu futuro.",
-        "Ele não fala nem escreve o português corretamente."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "No período 'Não te afastes, *que* a situação exige cautela', a oração sublinhada é corretamente classificada como:",
-      "options": [
-        "Coordenada Sindética Aditiva, com sentido de reforço.",
-        "Coordenada Sindética Explicativa, introduzindo uma justificativa para a ordem.",
-        "Subordinada Substantiva Apositiva, complementando o sentido.",
-        "Subordinada Adverbial Causal, com vírgula de deslocamento."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "A frase 'O estudo do Latim é a base. A base da nossa língua é o Latim. O Latim é importante.' apresenta falha de progressão por:",
-      "options": [
-        "Coesão Sequencial Inadequada.",
-        "Tópico Constante Excessivo (Monotonia).",
-        "Tópico Nulo (Circularidade).",
-        "Falta de coerência interna."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A progressão textual que depende da *referência catafórica* para introduzir seu tema principal é mais comum em textos de natureza:",
-      "options": [
-        "Narrativa (contos e crônicas).",
-        "Expositiva ou científica (listas, demonstrações).",
-        "Poética (lírica e subjetiva).",
-        "Argumentativa (dissertações com tese implícita)."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "A transição de 'tema' para 'rema' em 'A corrupção é um mal. Esse mal afeta a confiança. A confiança perdida dificulta a estabilidade.' é um exemplo de progressão por:",
-      "options": [
-        "Tópico Constante.",
-        "Tópicos Derivados (em cadeia).",
-        "Salto de Tópico (Tópico Nulo).",
-        "Progressão Paralela."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "Qual é a classificação morfológica e o processo de derivação do vocábulo 'incansável'?",
-      "options": [
-        "Advérbio, Derivação Sufixal.",
-        "Substantivo, Derivação Prefixal.",
-        "Adjetivo, Derivação Prefixal e Sufixal (NÃO é parassíntese).",
-        "Adjetivo, Derivação Parassintética."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Qual dos adjetivos compostos exige a flexão apenas do último elemento, mesmo que o primeiro seja um adjetivo:",
-      "options": [
-        "Sapatos azul-marinho.",
-        "Alianças dourado-claras.",
-        "Relações afro-brasileiras.",
-        "Tênis verde-musgo."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A palavra 'envelhecer' é formada pelo processo de Parassíntese a partir do adjetivo 'velho'. Qual adjetivo abaixo é formado pelo mesmo processo (prefixo + radical + sufixo, simultaneamente)?",
-      "options": [
-        "Desleal.",
-        "Amedrontador.",
-        "Subterrâneo.",
-        "Desumano."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "A principal falha de uma paráfrase malfeita de um texto científico é:",
-      "options": [
-        "O uso excessivo de termos técnicos do original.",
-        "A manutenção da estrutura sintática original (risco de plágio).",
-        "O uso de verbos de elocução inadequados.",
-        "A simplificação excessiva que compromete a precisão conceitual do original."
-      ],
-      "correct": 3
-    },
-    {
-      "text": "O que caracteriza a *inferência válida* em interpretação textual?",
-      "options": [
-        "É a leitura literal e explícita do texto (compreensão).",
-        "É a opinião do leitor sobre o tema, sem relação com o texto.",
-        "É a conclusão logicamente deduzida das premissas contidas no texto, mesmo que implícita.",
-        "É a introdução de conhecimento de mundo que contradiz as informações do texto."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "Em um editorial jornalístico que critica veementemente uma decisão governamental, a função da linguagem que coexiste e se sobrepõe à Função Referencial (informação) é a:",
-      "options": [
-        "Metalinguística.",
-        "Fática.",
-        "Emotiva (foco no emissor e sua atitude).",
-        "Conativa (foco no receptor e sua persuasão)."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A diferença entre um argumento e a *ideia central* (tese) de um texto argumentativo reside no fato de que:",
-      "options": [
-        "A tese é um fato comprovado, e o argumento é uma opinião.",
-        "A tese é o ponto de vista a ser defendido; os argumentos são as razões que a sustentam.",
-        "O argumento é sempre apresentado na introdução, e a tese, no desenvolvimento.",
-        "A tese é implícita, e o argumento é sempre explícito."
-      ],
-      "correct": 1
-    },
-    {
-      "text": "A extrapolação é um erro de interpretação que ocorre quando o leitor:",
-      "options": [
-        "Limita-se a repetir o que está no texto sem analisar.",
-        "Deduza algo não escrito, mas implicitamente contido no texto.",
-        "Distorce o sentido original do texto para adequá-lo à sua opinião.",
-        "Utiliza apenas a Função Conativa da Linguagem."
-      ],
-      "correct": 2
-    },
-    {
-      "text": "A coesão referencial por *elipse* é um desafio para o leitor porque exige que ele:",
-      "options": [
-        "Conecte orações de mesmo valor sintático usando conjunções.",
-        "Identifique a omissão de um termo já mencionado por meio do contexto sintático e semântico.",
-        "Substitua um termo por um sinônimo ou hiperônimo para evitar a repetição.",
-        "Analise a progressão de tópicos derivados ao longo do parágrafo."
-      ],
-      "correct": 1
-    }
-
-
-    // adicione mais perguntas aqui se quiser
-  ];
+  {
+    "text": "1. Nome do terceiro maior continente em extensão territorial.",
+    "options": [
+      "América",
+      "Ásia",
+      "África",
+      "Europa"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "2. Importante bioma considerado *hotspot* encontrado no extremo sul e no extremo norte da África.",
+    "options": [
+      "Floresta do Congo",
+      "Karoo Suculento",
+      "Bioma do Atlas",
+      "Savana"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "3. Tipo de bioma que no Brasil é conhecido como *Cerrado*.",
+    "options": [
+      "Tundra",
+      "Savana",
+      "Taiga",
+      "Floresta Temperada"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "4. Tipo de vegetação encontrado no planalto da Etiópia, com plantas escassas e de baixo porte.",
+    "options": [
+      "Floresta Tropical",
+      "Vegetação de Deserto",
+      "Vegetação de Altitude (Alpine)",
+      "Manguezais"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "5. Tipos de estruturas geológicas predominantes na África.",
+    "options": [
+      "Dobramentos Modernos e Bacias Sedimentares",
+      "Escudos Cristalinos e Bacias Sedimentares",
+      "Plataformas Estáveis e Vulcões Ativos",
+      "Dobramentos Modernos e Escudos Cristalinos"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "6. Tipo de recurso natural muito explorado nos *escudos cristalinos*.",
+    "options": [
+      "Petróleo e Gás Natural",
+      "Carvão Mineral",
+      "Recursos minerais metálicos (Ex: Ferro, Ouro)",
+      "Água subterrânea"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "7. Importante rio que atravessa o *Equador duas vezes*.",
+    "options": [
+      "Rio Nilo",
+      "Rio Níger",
+      "Rio Zambeze",
+      "Rio Congo"
+    ],
+    "correct": 3
+  },
+  {
+    "text": "8. Importantes mares que banham a África nas porções *norte e nordeste*.",
+    "options": [
+      "Mar Báltico e Mar Negro",
+      "Mar Mediterrâneo e Mar Vermelho",
+      "Mar do Caribe e Mar do Norte",
+      "Mar Egeu e Mar Cáspio"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "9. Nome do importante *dobramento moderno* da África.",
+    "options": [
+      "Montes Drakensberg",
+      "Planaltos Centrais",
+      "Cordilheira do Atlas",
+      "Rift Valley"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "10. Conceito que se refere à natureza das rochas e compõe um relevo.",
+    "options": [
+      "Climatologia",
+      "Hidrografia",
+      "Geologia/Estrutura Geológica",
+      "Biogeografia"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "11. Nome dado ao conjunto de falhas tectônicas que se estende por mais de 5 mil km, cobrindo uma área que vai desde a Síria até Moçambique.",
+    "options": [
+      "Cinturão Alpino",
+      "Great Rift Valley (Vale do Rift)",
+      "Dorsal Mesoatlântica",
+      "Cadeia do Atlas"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "12. Nome do limite da placa que faz com que as terras se separem.",
+    "options": [
+      "Limite Convergente",
+      "Limite Transformante",
+      "Limite Divergente",
+      "Limite Transcorrente"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "13. Nome da floresta que se apresenta densa, pesada, alta e com grande biodiversidade, e se desenvolve em climas quentes e úmidos na África.",
+    "options": [
+      "Caatinga Africana",
+      "Floresta do Congo",
+      "Floresta do Atlas",
+      "Floresta das Montanhas Ruwenzori"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "14. Nome da mais importante floresta africana.",
+    "options": [
+      "Floresta Amazônica",
+      "Floresta Boreal",
+      "Floresta do Congo",
+      "Floresta de Bornéu"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "15. Bioma que apresenta vegetação herbácea e arbustiva, em climas com estação chuvosa e seca.",
+    "options": [
+      "Tundra",
+      "Taiga",
+      "Savana",
+      "Floresta Equatorial"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "16. Nome da faixa do clima semiárido que separa o Deserto do Saara das savanas e que está em elevado processo de desertificação.",
+    "options": [
+      "Magreb",
+      "Sahel",
+      "Serengeti",
+      "Kalahari"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "17. Nome da área que concentra em suas proximidades muitos vulcões e os lagos Niassa e Tanganica.",
+    "options": [
+      "Bacia do Congo",
+      "Vale do Rift (Rift Valley)",
+      "Deserto do Saara",
+      "Planície Costeira"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "18. Nome do monte formado por um vulcão situado na Tanzânia, o mais alto de toda a África.",
+    "options": [
+      "Monte Atlas",
+      "Monte Quênia",
+      "Monte Ruwenzori",
+      "Monte Kilimanjaro"
+    ],
+    "correct": 3
+  },
+  {
+    "text": "19. Nome dos principais rios africanos.",
+    "options": [
+      "Rio Reno e Rio Danúbio",
+      "Rio Nilo e Rio Congo",
+      "Rio Mississipi e Rio Amazonas",
+      "Rio Amarelo e Rio Yangtzé"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "20. O Rio Nilo apresenta uma estação em que as chuvas transportam sedimentos e fertilizam o solo, permitindo a prática da agricultura. Qual o nome dessa estação?",
+    "options": [
+      "Seca",
+      "Inverno",
+      "Cheia (ou Inundação)",
+      "Vazante"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "21. Importante rio africano muito utilizado para agricultura, pesca, transporte e energia.",
+    "options": [
+      "Rio Orange",
+      "Rio Nilo",
+      "Rio Zambeze",
+      "Rio Limpopo"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "22. Importante elemento físico que define os *biomas*.",
+    "options": [
+      "Latitude e Longitude",
+      "Estrutura Geológica",
+      "Clima (Temperatura e Precipitação)",
+      "Corrente Marítima"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "23. Onde estão concentrados os maiores e principais desertos da África.",
+    "options": [
+      "Porção Leste",
+      "Porção Central",
+      "Porção Norte e Sul",
+      "Região do Golfo da Guiné"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "24. Clima que ocorre próximo ao Equador.",
+    "options": [
+      "Subtropical",
+      "Temperado",
+      "Equatorial",
+      "Mediterrâneo"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "25. Clima com índices *baixos de precipitação*, chuvas mal distribuídas e é tropical.",
+    "options": [
+      "Clima Equatorial",
+      "Clima Subtropical Úmido",
+      "Clima Semiárido",
+      "Clima Polar"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "26. Nome do gráfico que apresenta a variação de temperatura representada por uma linha e a representação da chuva por colunas.",
+    "options": [
+      "Histograma",
+      "Gráfico de Barras",
+      "Climograma",
+      "Gráfico de Setores"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "27. Grande problema do Rio Congo que impede a ligação do mesmo entre várias cidades.",
+    "options": [
+      "Poluição Industrial",
+      "Grandes Cataratas e Rápidos",
+      "Baixo Volume de Água",
+      "Conflitos Armados"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "28. Uma importante característica do Rio Congo que impede a navegação.",
+    "options": [
+      "Longos trechos planos",
+      "Profundidade elevada",
+      "Presença de quedas d'água e corredeiras",
+      "Curvas suaves"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "29. Nome de um importante rio da África Ocidental.",
+    "options": [
+      "Rio Nilo",
+      "Rio Níger",
+      "Rio Zambeze",
+      "Rio Orange"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "30. O importante rio africano muito utilizado para pesca, agricultura e transporte, que garante o sustento de grande parte da população.",
+    "options": [
+      "Rio Congo",
+      "Rio Orange",
+      "Rio Nilo",
+      "Rio Limpopo"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "31. Importante país africano rico em minerais.",
+    "options": [
+      "Egito",
+      "República Democrática do Congo (RDC)",
+      "Líbia",
+      "Nigéria"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "32. Grande responsável pela poluição em diversas áreas da África.",
+    "options": [
+      "Atividade Petrolífera/Industrial e descarte de lixo do Ocidente",
+      "Atividade Turística",
+      "Agricultura de Subsistência",
+      "Presença de Biomas Desérticos"
+    ],
+    "correct": 0
+  },
+  {
+    "text": "33. Países onde foram encontrados diversos aquíferos nas bacias sedimentares no norte da África (Ex: Aquífero Núbio).",
+    "options": [
+      "Nigéria e Gana",
+      "Egito, Líbia, Sudão e Chade",
+      "Angola e Namíbia",
+      "África do Sul e Lesoto"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "34. Nome da barragem construída no Rio Nilo que acabou com a irregularidade das cheias, permitindo maior produção de energia e agricultura.",
+    "options": [
+      "Barragem de Kariba",
+      "Barragem de Assuã",
+      "Barragem das Três Gargantas",
+      "Barragem de Grand Ethiopian Renaissance"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "35. Clima predominante da África.",
+    "options": [
+      "Clima Mediterrâneo",
+      "Clima Tropical",
+      "Clima Polar",
+      "Clima Temperado"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "36. O continente africano apresenta paisagens e climas semelhantes ao norte e ao sul. Isso significa que o continente tem uma simetria em relação a qual elemento geográfico?",
+    "options": [
+      "Círculo Polar Ártico",
+      "Meridiano de Greenwich",
+      "Trópico de Câncer",
+      "Linha do Equador"
+    ],
+    "correct": 3
+  },
+  {
+    "text": "37. Região da África com maior índice pluviométrico.",
+    "options": [
+      "Deserto do Saara",
+      "Bacia do Rio Congo (região equatorial)",
+      "Região do Cabo (África do Sul)",
+      "Região do Sahel"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "38. Nome da área em meio ao deserto onde há afloramento de águas subterrâneas.",
+    "options": [
+      "Duna",
+      "Oásis",
+      "Erg",
+      "Hamada"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "39. Em que porção da África está sendo construída ou plantada a *Grande Muralha Verde*?",
+    "options": [
+      "Extremo Sul (Kalahari)",
+      "Borda Norte do Deserto do Saara",
+      "Região do Sahel (faixa de transição sul do Saara)",
+      "Próximo ao Rio Nilo"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "40. O maior objetivo da implantação do Projeto da Muralha Verde é impedir a...",
+    "options": [
+      "Expansão da Agricultura de Exportação",
+      "Desertificação",
+      "Imigração para a Europa",
+      "Construção de Novas Cidades"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "41. O que significa *hotspot*?",
+    "options": [
+      "Ponto de concentração de indústrias",
+      "Ponto de alta atividade vulcânica",
+      "Área com grande biodiversidade e alto grau de ameaça",
+      "Zona de baixa precipitação e seca"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "42. Continente considerado berço da humanidade.",
+    "options": [
+      "Ásia",
+      "África",
+      "América do Sul",
+      "Europa"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "43. Nome dado ao ciclo colonial que se iniciou no século XIX, que levou as nações europeias a darem início a uma expansão imperialista sobre os continentes africano e asiático.",
+    "options": [
+      "Globalização",
+      "Neocolonialismo",
+      "Feudalismo",
+      "Mercantilismo"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "44. Elementos essenciais na África de interesse dos europeus, para suprir a demanda durante a Revolução Industrial.",
+    "options": [
+      "Mão de obra e commodities agrícolas",
+      "Matérias-primas e mercados consumidores",
+      "Serviços e tecnologia",
+      "Energia solar e eólica"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "45. Mão de obra utilizada na exploração europeia na África, principalmente para mineração e plantação.",
+    "options": [
+      "Mão de obra assalariada",
+      "Mão de obra escrava",
+      "Trabalhadores autônomos",
+      "Mão de obra qualificada"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "46. Nome dado ao processo de emancipação de territórios coloniais em relação às metrópoles colonizadoras, resultando na independência das colônias.",
+    "options": [
+      "Colonização",
+      "Descolonização",
+      "Globalização",
+      "Gentrificação"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "47. Ano do fim da Segunda Guerra Mundial, que marcou o início dos movimentos de libertação na África.",
+    "options": [
+      "1918",
+      "1939",
+      "1945",
+      "1968"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "48. Um dos grandes problemas do pós-independência (descolonização) africana.",
+    "options": [
+      "Conflitos e guerras civis",
+      "Forte crescimento econômico",
+      "Estabilidade política",
+      "Integração social"
+    ],
+    "correct": 0
+  },
+  {
+    "text": "49. O nome dado às rivalidades étnicas e religiosas, de movimentos separatistas, governos opressores e ditaduras, que geram conflitos.",
+    "options": [
+      "Integração",
+      "Tribais",
+      "Desenvolvimento",
+      "Cooperação"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "50. Região da África Ocidental que reivindica separação.",
+    "options": [
+      "África do Sul",
+      "Saara Ocidental",
+      "Etiópia",
+      "Madagascar"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "51. País africano que concentra grandes reservas de fosfato e minério de ferro.",
+    "options": [
+      "Egito",
+      "Nigéria",
+      "Marrocos",
+      "Angola"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "52. Forma de consulta popular sobre um assunto de grande relevância, na qual o povo manifesta-se sobre uma lei — seja ordinária, complementar ou emenda à Constituição.",
+    "options": [
+      "Plebiscito",
+      "Referendo",
+      "Eleição Direta",
+      "Votação Secreta"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "53. Território situado a noroeste da África que reivindica, ainda hoje, a separação através de referendo.",
+    "options": [
+      "Sudão do Sul",
+      "Eritreia",
+      "Saara Ocidental",
+      "Djibouti"
+    ],
+    "correct": 2
+  },
+  {
+    "text": "54. Nome do movimento que gerou uma série de protestos de rua nos países árabes do norte da África e do Oriente Médio, a partir de 2010.",
+    "options": [
+      "Guerra Fria",
+      "Primavera Árabe",
+      "Revolução Industrial",
+      "Neocolonialismo"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "55. País que se tornou conhecido como 'Chifre da África'.",
+    "options": [
+      "Nigéria",
+      "Somália",
+      "África do Sul",
+      "República Democrática do Congo"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "56. Problemas mais graves de Somália, Guerra Civil, fome, pobreza, miséria, e ação de grupos armados, resistência de governos ditadores.",
+    "options": [
+      "Alto desenvolvimento industrial",
+      "Grandes problemas sociais e conflitos",
+      "Forte estabilidade política",
+      "Alta taxa de IDH"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "57. Nome da capital do Sudão do Sul.",
+    "options": [
+      "Cartum",
+      "Juba",
+      "Mogadíscio",
+      "Quito"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "58. Importante mineral encontrado no Sul do Sudão.",
+    "options": [
+      "Ouro",
+      "Petróleo",
+      "Diamante",
+      "Carvão"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "59. País africano que surgiu em 2011 após separação do Sudão.",
+    "options": [
+      "Eritreia",
+      "Sudão do Sul",
+      "Djibouti",
+      "Níger"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "60. Etnias que estão em conflito em Ruanda.",
+    "options": [
+      "Zulu e Xhosa",
+      "Hutus e Tutsis",
+      "Berberes e Árabes",
+      "Bantu e Pigmeus"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "61. Nome que se dá à morte de grandes grupos cujo objetivo é eliminar pessoas por questões políticas, religiosas, étnicas ou militares.",
+    "options": [
+      "Terrorismo",
+      "Etnocídio/Genocídio",
+      "Guerra Civil",
+      "Revolução"
+    ],
+    "correct": 1
+  },
+  {
+    "text": "62. Nome que se dá à morte de elementos culturais de um povo.",
+    "options": [
+      "Etnocídio",
+      "Genocídio",
+      "Holocausto",
+      "Assassínio"
+    ],
+    "correct": 0
+  }
+]
 
   /**********************
    * Estado e elementos
